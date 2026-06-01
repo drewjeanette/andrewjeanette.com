@@ -3,17 +3,25 @@ import path from 'path';
 import { defineConfig, loadEnv, type Plugin } from 'vite';
 import react from '@vitejs/plugin-react';
 
-// Copies the static landing page (home/index.html) to dist/index.html after
-// the app build, so the root path "/" serves the home page while the React
-// app lives under "/portfolio/".
-function copyHomePage(): Plugin {
+// Copies standalone static pages into the build output after the React app is
+// built, so they sit alongside it:
+//   - home/         -> dist/             (root "/" landing page)
+//   - weatherapp/   -> dist/portfolio/weatherapp/  ("/portfolio/weatherapp/")
+function copyStaticPages(): Plugin {
+  const copies = [
+    { from: 'home', to: 'dist' },
+    { from: 'weatherapp', to: 'dist/portfolio/weatherapp' },
+  ];
   return {
-    name: 'copy-home-page',
+    name: 'copy-static-pages',
     closeBundle() {
-      const src = path.resolve(__dirname, 'home/index.html');
-      const dest = path.resolve(__dirname, 'dist/index.html');
-      fs.mkdirSync(path.dirname(dest), { recursive: true });
-      fs.copyFileSync(src, dest);
+      for (const { from, to } of copies) {
+        fs.cpSync(
+          path.resolve(__dirname, from),
+          path.resolve(__dirname, to),
+          { recursive: true }
+        );
+      }
     }
   };
 }
@@ -34,7 +42,7 @@ export default defineConfig(({ mode }) => {
         port: 3000,
         host: '0.0.0.0',
       },
-      plugins: [react(), copyHomePage()],
+      plugins: [react(), copyStaticPages()],
       define: {
         'process.env.API_KEY': JSON.stringify(env.GEMINI_API_KEY),
         'process.env.GEMINI_API_KEY': JSON.stringify(env.GEMINI_API_KEY)

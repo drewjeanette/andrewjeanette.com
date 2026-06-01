@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+    <meta charset='UTF-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+
+    <meta name='apple-mobile-web-app-capable' content='yes'> 
+    <meta name='apple-mobile-web-app-status-bar-style' content='black'> 
+    
+    <title>Weather App</title>
+
+    <link rel='icon' type='image/x-icon' href='images/WeatherICO.ico'> 
+    <link rel='apple-touch-icon' href='images/Weather60x60.png'> 
+    <link rel='apple-touch-icon' sizes='60x60' href='images/Weather76x76.png'> 
+    <link rel='apple-touch-icon' sizes='114x114' href='images/Weather120x120.png'> 
+    <link rel='apple-touch-icon' sizes='144x144' href='images/Weather152x152.png'>
+
+    <link href='https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/css/bootstrap.min.css' rel='stylesheet'>
+    <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css'>
+</head>
+<body class='text-center p-4 ' style='background-color: #6D96A2;'>
+    
+        <div class='card col-12 col-md-9 col-lg-7 container d-flex justify-content-center align-items-center min-vh-100' style='background-color: #f0f8ff;' role='region' aria-label='app-title'>
+            <h2 id='app-title' class='mb-4'>Weather App</h2>
+
+            <h3 id='strLocation' class='mb-4' aria-label='Current location'>Loading location...</h3>
+            
+            <input type='text' id='strSearchBar' class='form-control mb-3' placeholder='Enter location' aria-label='Search for a location'/>
+            <button id='btnSearch' class='btn btn-primary mb-3' aria-label='Search weather for entered location'>Search</button>
+            
+            <div class='d-flex justify-content-between align-items-center mb-3'>
+                <div class='text-left'>
+                    <h4 id='strTemp' aria-label='Current temperature'></h4>
+                    <p id='strHumidity' aria-label='Current humidity'></p>
+                </div>
+                <i id='strWeatherIcon' class='bi' style='font-size: 75px;' role='img' aria-label='Weather condition icon'></i>
+            </div>
+
+            <div id='weathermap' style='width: 100%; height: 500px;' aria-label='Weather map display'></div>
+            
+            <a href="https://open-meteo.com/" target="_blank">Weather data by Open-Meteo</a>    <!-- This line is from ChatGPT-->
+            <a href="https://api.windy.com/" target="_blank">Weather Map by Windy</a>
+            <a href="https://nominatim.org/" target="_blank">Location and Search Functionality by Nominatim</a>
+        </div>
+
+    <script src='https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js'></script>
+    <script src='https://cdn.jsdelivr.net/npm/sweetalert2@11'></script>
+
+    <script>
+        // Execute once the DOM is fully loaded
+        document.addEventListener('DOMContentLoaded', () => {
+            const objElements = {
+                btnSearch: document.querySelector('#btnSearch'),
+                strSearchBar: document.querySelector('#strSearchBar'),
+                strLocation: document.querySelector('#strLocation'),
+                strWeatherIcon: document.querySelector('#strWeatherIcon'),
+                strTemp: document.querySelector('#strTemp'),
+                strHumidity: document.querySelector('#strHumidity')
+            }
+
+            // When the search button is clicked, initiate location handling for the user's input.
+            objElements.btnSearch.addEventListener('click', () => {
+                handleSearchLocation()
+            })
+          
+            function handleSearchLocation() {
+                //  1. Reads the location entered by the user.
+                //  2. Calls Nominatim API to convert location name to geographical coordinates.
+                //  3. Displays an error alert if the location is invalid or fetch fails.
+                //  4. If successful, fetches weather data and initializes the weather map based on the location.
+
+                const strLocationInput = objElements.strSearchBar.value.trim()
+
+                // Check if the user provided a location
+                if (!strLocationInput) {
+                    Swal.fire({
+                        title: 'Input Required',
+                        text: 'Please enter a location',
+                        icon: 'warning'
+                    })
+                    return
+                }
+
+                // Use Nominatim to get latitude and longitude from location name
+                fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(strLocationInput)}`)
+                .then(objResponse => objResponse.json())
+                .then(arrData => {
+                    // If no results, inform the user
+                    if (arrData.length === 0) {
+                        Swal.fire({
+                            title: 'Not Found',
+                            text: 'Location not found',
+                            icon: 'error'
+                        })
+                        return
+                    }
+
+                    // Retrieve weather data and update map based on first matching location
+                    fetchWeather(arrData[0].lat, arrData[0].lon)
+                    initWeatherMap(arrData[0].lat, arrData[0].lon)
+
+                    // Update displayed location name
+                    objElements.strLocation.innerText = strLocationInput
+                })
+                .catch(() => {
+                    Swal.fire({
+                        title: 'Error',
+                        text: 'Error fetching location',
+                        icon: 'error'
+                    })
+                })
+            }
+
+            function fetchLocation() {
+                //  1. Tries to get the user's current location via the browser's Geolocation API.
+                //  2. If permission is granted, it uses these coordinates to fetch weather, update location name, and display the map.
+                //  3. If not supported or permission is denied, alerts the user and updates the UI accordingly.
+
+                if (navigator.geolocation) {
+                    navigator.geolocation.getCurrentPosition(
+                        (objPosition) => {
+                            const fltLatitude = objPosition.coords.latitude
+                            const fltLongitude = objPosition.coords.longitude
+                            
+                            // Calls other functions to fetch and display weather and map data
+                            fetchWeather(fltLatitude, fltLongitude)
+                            refreshLocationName(fltLatitude, fltLongitude)
+                            initWeatherMap(fltLatitude, fltLongitude)
+                        },
+                        () => {
+                            Swal.fire({
+                                title: 'Permission Denied',
+                                text: 'Location access Denied. You can instead search for a specific location.',
+                                icon: 'warning'
+                            })
+                            objElements.strLocation.innerText = 'Location Permission Denied'
+                        }
+                    )
+                } else {
+                    Swal.fire({
+                        title: 'Error',
+                        text: 'Geolocation is not supported by this browser.',
+                        icon: 'error'
+                    })
+                    objElements.strLocation.innerText = 'Location Not Available'
+                }
+            }
+
+            function fetchWeather(fltLatitude, fltLongitude) {
+                //  1. Fetches current weather information from Open-Meteo using the given latitude and longitude.
+                //  2. Updates temperature, humidity, and weather icon on the UI.
+                //  3. If fetching fails, alerts the user about the error.
+
+                fetch(`https://api.open-meteo.com/v1/forecast?latitude=${fltLatitude}&longitude=${fltLongitude}&current=temperature_2m,relative_humidity_2m,weathercode&temperature_unit=fahrenheit&timezone=America/Chicago`)
+                .then(objResponse => objResponse.json())
+                .then(objData => {
+                    // Display fetched temperature, humidity, and corresponding icon
+                    objElements.strTemp.innerText = 'Temperature: ' + objData.current.temperature_2m + '°F'
+                    objElements.strHumidity.innerText = 'Humidity: ' + objData.current.relative_humidity_2m + '%'
+                    objElements.strWeatherIcon.className = 'bi ' + fetchWeatherIcon(objData.current.weathercode)
+                })
+                .catch(() => {
+                    Swal.fire({
+                        title: 'Error',
+                        text: 'Could not fetch weather data',
+                        icon: 'error'
+                    })
+                })
+            }
+
+            function fetchWeatherIcon(intCode) {
+            //   Maps the weather code provided by the API to a Bootstrap Icons class name.
+            //   Returns the icon class that visually represents the weather condition.
+                
+                const objIcons = {
+                    0: 'bi-brightness-high', 1: 'bi-brightness-high', // Clear
+                    2: 'bi-cloud', 3: 'bi-cloud', // Cloudy
+                    45: 'bi-cloud-fog', 48: 'bi-cloud-fog', // Foggy
+                    51: 'bi-cloud-rain', 53: 'bi-cloud-rain',55: 'bi-cloud-rain', 56: 'bi-cloud-rain',57: 'bi-cloud-rain',
+                    61: 'bi-cloud-rain', 63: 'bi-cloud-rain',65: 'bi-cloud-rain',66: 'bi-cloud-rain', 67: 'bi-cloud-rain', // Rain
+                    71: 'bi-cloud-snow',73: 'bi-cloud-snow',75: 'bi-cloud-snow',77: 'bi-cloud-snow', // Snow
+                    80: 'bi-cloud-rain-heavy',81: 'bi-cloud-rain-heavy',82: 'bi-cloud-rain-heavy', // Heavy Rain
+                    85: 'bi-cloud-snow',86: 'bi-cloud-snow',  // Snow
+                    95: 'bi-cloud-lightning',96: 'bi-cloud-lightning', 99: 'bi-cloud-lightning' // Lightning
+                }
+                return objIcons[intCode]
+            }
+
+            function refreshLocationName(fltLatitude, fltLongitude) {
+                //   1. Calls the Nominatim reverse-geocoding endpoint to get the readable location name.
+                //   2. Updates the displayed city, town, or village in the UI.
+                //   3. If the request fails, shows an error message and sets a fallback text.
+                
+                fetch(`https://nominatim.openstreetmap.org/reverse?lat=${fltLatitude}&lon=${fltLongitude}&format=json`)
+                .then(objResponse => objResponse.json())
+                .then(objData => {
+                    // If city is unavailable, use town or village
+                    objElements.strLocation.innerText = objData.address.city || objData.address.town || objData.address.village
+                })
+                .catch(() => {
+                    Swal.fire({
+                        title: 'Error',
+                        text: 'Failed to get location name',
+                        icon: 'error'
+                    })
+                    objElements.strLocation.innerText = 'Unknown location'
+                })
+            }
+
+            
+            function initWeatherMap(fltLatitude, fltLongitude) {
+                //Embeds a Windy.com map into the designated <div> showing the weather overlay
+                //centered at the specified latitude and longitude.
+                
+                // Directly inject the iframe with the correct lat/lon parameters
+                document.querySelector('#weathermap').innerHTML = 
+                    `<iframe width='100%' height='500' src='https://embed.windy.com/embed2.html?lat=${fltLatitude}&lon=${fltLongitude}&zoom=5&level=surface&overlay=wind&menu=true&message=true&marker=true&calendar=now&pressure=true&type=map&location=coordinates&detail=true&detailLat=${fltLatitude}&detailLon=${fltLongitude}&metricWind=mph&metricTemp=%C2%B0F' frameborder='0' allowfullscreen></iframe>`
+            }
+
+            // Automatically try to fetch current location when the page loads
+            fetchLocation()
+        })
+
+        //  *GENERATIVE AI USE* 
+
+        // I used ChatGPT to help clarify my code with descriptive comments and troubleshoot some issues.
+        // I did not use GenerativeAI to create this application.
+        // ChatGPT was used for explanation and guidance towards adding in additional APIs
+        // ChatGPT wrote the line <a href="https://open-meteo.com/" target="_blank">Open-Meteo</a>
+        // ChatGPT was also used in order to create the icon for this application.
+
+    </script>
+</body>
+</html>
