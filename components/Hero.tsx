@@ -86,7 +86,7 @@ const Hero: React.FC<HeroProps> = ({ navigateTo }) => {
           <div className="relative">
             <div className="absolute -inset-3 bg-gradient-to-br from-blue-500 to-indigo-500 rounded-3xl opacity-20 blur-lg"></div>
             <img
-              src={`${import.meta.env.BASE_URL}profile.jpg`}
+              src={`${import.meta.env.BASE_URL}profile.png`}
               alt="Andrew Jeanette"
               className="relative w-48 h-48 md:w-60 md:h-60 rounded-3xl object-cover border-4 border-white shadow-xl"
             />
