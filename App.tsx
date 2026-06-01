@@ -3,7 +3,7 @@ import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import Education from './components/Education';
 import Experience from './components/Experience';
-import ToolsSection from './components/ToolsSection';
+import ProjectsSection from './components/ProjectsSection';
 import Footer from './components/Footer';
 import { Section } from './types';
 
@@ -18,8 +18,8 @@ const App: React.FC = () => {
         return <Education />;
       case Section.EXPERIENCE:
         return <Experience />;
-      case Section.TOOLS:
-        return <ToolsSection />;
+      case Section.PROJECTS:
+        return <ProjectsSection />;
       default:
         return <Hero navigateTo={setActiveSection} />;
     }

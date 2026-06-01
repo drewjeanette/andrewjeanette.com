@@ -14,7 +14,7 @@ const Navbar: React.FC<NavbarProps> = ({ activeSection, setActiveSection }) => {
     { label: 'Home / About Me', value: Section.HOME },
     { label: 'Education', value: Section.EDUCATION },
     { label: 'Experience', value: Section.EXPERIENCE },
-    { label: 'DS 3850 Tools', value: Section.TOOLS },
+    { label: 'Projects', value: Section.PROJECTS },
   ];
 
   const handleNavClick = (value: Section) => {

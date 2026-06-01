@@ -16,10 +16,10 @@ const experienceData: ExperienceItem[] = [
     id: "ELCO",
     role: "Software Developer Intern",
     company: "Elco Dev, LLC",
-    duration: "May 2025 - Present",
+    duration: "May 2025 - May 2026",
     location: "Remote",
-    description: "Optimized databases by implementing indexing that improved query performance from 4 minutes to under 5 seconds. Created an online inventory management system with filtering and Excel exports that received strong positive feedback from the client. Tested and debugged server configurations and cloud-hosted apps on Firebase Hosting. Currently designing, implementing, and supporting a mini golf game in Unity for iOS and Android.",
-    skills: ["SQL Server", "JavaScript", "React", "Firebase", "Unity"]
+    description: "Optimized databases with indexing that cut query times from 4 minutes to under 5 seconds, and built an online inventory management system with filtering and Excel exports that earned strong client feedback. Developed a 3D mini-golf game in Unity 6 and C# featuring a daily-seed system that generates one globally synchronized course every 24 hours. Built a custom drag-and-release shooting mechanic with trajectory rendering, tuned arcade physics simulating turf friction and wall ricochets, a dual-camera system (ball-tracking and bounded free-fly), and a responsive UI with live stroke tracking, a midnight countdown, and an end-of-match summary.",
+    skills: ["Unity 6", "C#", "SQL Server", "JavaScript", "React", "Firebase"]
   },
   {
     id: "ICUBE",
