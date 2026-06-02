@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { BookOpen, Award, CloudSun, MapPin, Smartphone, Terminal, GitBranch, ShieldCheck, Database, Globe, Users, Lock, FileText } from 'lucide-react';
+import { BookOpen, Award, Terminal, GitBranch, ShieldCheck, Database } from 'lucide-react';
 import { EducationItem } from '../types';
 
 const educationData: EducationItem[] = [
@@ -107,105 +107,6 @@ const Education: React.FC = () => {
               </li>
             </ul>
           </div>
-        </div>
-      </div>
-
-      {/* Major Projects Highlight */}
-      <div>
-        <h3 className="text-3xl font-bold text-slate-900 dark:text-white mb-8 border-l-4 border-blue-600 pl-4">Featured Academic Projects</h3>
-
-        <div className="space-y-8">
-            {/* Weather App Project */}
-            <div className="bg-white dark:bg-slate-800 p-8 rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm hover:shadow-md hover:border-blue-300 dark:hover:border-blue-600 transition-all">
-            <div className="flex flex-col md:flex-row gap-8">
-                <div className="flex-1 space-y-4">
-                <div className="flex items-center gap-3">
-                    <div className="p-2 bg-blue-100 dark:bg-blue-900/50 rounded-lg text-blue-600 dark:text-blue-300">
-                        <CloudSun size={32} />
-                    </div>
-                    <div>
-                        <h4 className="text-2xl font-bold text-slate-900 dark:text-white">Real-Time Weather App</h4>
-                        <span className="text-sm font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wide">Web Development Class Project</span>
-                    </div>
-                </div>
-
-                <p className="text-slate-600 dark:text-slate-300 leading-relaxed text-lg">
-                    I built a real-time Weather App that uses your device's location, or any location you enter, and displays live weather conditions and an interactive weather map using free public APIs.
-                </p>
-                <p className="text-slate-600 dark:text-slate-300 leading-relaxed">
-                    It’s fully responsive and works great on mobile and desktop devices. You can even save it to your home screen, and it'll launch like a native app complete with a custom weather icon I generated using Grok! This project taught me a lot about working with APIs, mobile optimization, and user-friendly design.
-                </p>
-                </div>
-
-                <div className="md:w-1/3 bg-slate-50 dark:bg-slate-900/50 rounded-xl p-6 border border-slate-100 dark:border-slate-700">
-                    <h5 className="font-bold text-slate-900 dark:text-white mb-4 flex items-center gap-2">
-                        <Globe size={18} className="text-blue-500 dark:text-blue-400" /> Tech Stack & APIs
-                    </h5>
-                    <div className="flex flex-wrap gap-2">
-                        {["HTML", "CSS", "JavaScript", "Bootstrap", "Open-Meteo API", "Nominatim API", "Windy.com API", "GitHub Pages"].map(tech => (
-                            <span key={tech} className="bg-white dark:bg-slate-700 text-slate-700 dark:text-slate-200 px-3 py-1.5 rounded-lg border border-slate-200 dark:border-slate-600 text-sm font-bold shadow-sm">
-                                {tech}
-                            </span>
-                        ))}
-                    </div>
-
-                    <h5 className="font-bold text-slate-900 dark:text-white mt-6 mb-4 flex items-center gap-2">
-                        <Smartphone size={18} className="text-blue-500 dark:text-blue-400" /> Key Features
-                    </h5>
-                    <ul className="space-y-2 text-sm text-slate-600 dark:text-slate-300">
-                        <li className="flex items-center gap-2"><MapPin size={14} /> Geolocation Support</li>
-                        <li className="flex items-center gap-2"><Smartphone size={14} /> PWA / Native-like Feel</li>
-                        <li className="flex items-center gap-2"><CloudSun size={14} /> Live Weather Mapping</li>
-                    </ul>
-                </div>
-            </div>
-            </div>
-
-            {/* Peer Evaluation Project */}
-            <div className="bg-white dark:bg-slate-800 p-8 rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm hover:shadow-md hover:border-blue-300 dark:hover:border-blue-600 transition-all">
-                <div className="flex flex-col md:flex-row gap-8">
-                    <div className="flex-1 space-y-4">
-                        <div className="flex items-center gap-3">
-                            <div className="p-2 bg-blue-100 dark:bg-blue-900/50 rounded-lg text-blue-600 dark:text-blue-300">
-                                <Users size={32} />
-                            </div>
-                            <div>
-                                <h4 className="text-2xl font-bold text-slate-900 dark:text-white">Peer Evaluation System</h4>
-                                <span className="text-sm font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wide">Web Development Class Project</span>
-                            </div>
-                        </div>
-
-                        <p className="text-slate-600 dark:text-slate-300 leading-relaxed text-lg">
-                            Collaborated with a team to build a secure system for students and faculty to manage peer evaluations. The platform allows faculty to design custom evaluation forms, assign students to groups, and track results, while students can securely log in to submit private or public feedback.
-                        </p>
-                        <p className="text-slate-600 dark:text-slate-300 leading-relaxed">
-                             This project focused on backend logic, secure data handling, and complex database relationships. We implemented a complete evaluation lifecycle from assignment creation to result aggregation, ensuring a user-friendly experience for both roles.
-                        </p>
-                    </div>
-
-                    <div className="md:w-1/3 bg-slate-50 dark:bg-slate-900/50 rounded-xl p-6 border border-slate-100 dark:border-slate-700">
-                        <h5 className="font-bold text-slate-900 dark:text-white mb-4 flex items-center gap-2">
-                            <Database size={18} className="text-blue-500 dark:text-blue-400" /> Tech Stack
-                        </h5>
-                        <div className="flex flex-wrap gap-2">
-                            {["PHP", "MySQL", "HTML/CSS", "Apache/XAMPP", "JavaScript", "Relational DB"].map(tech => (
-                                <span key={tech} className="bg-white dark:bg-slate-700 text-slate-700 dark:text-slate-200 px-3 py-1.5 rounded-lg border border-slate-200 dark:border-slate-600 text-sm font-bold shadow-sm">
-                                    {tech}
-                                </span>
-                            ))}
-                        </div>
-
-                        <h5 className="font-bold text-slate-900 dark:text-white mt-6 mb-4 flex items-center gap-2">
-                            <Lock size={18} className="text-blue-500 dark:text-blue-400" /> Key Features
-                        </h5>
-                        <ul className="space-y-2 text-sm text-slate-600 dark:text-slate-300">
-                            <li className="flex items-center gap-2"><ShieldCheck size={14} /> Secure RBAC Login</li>
-                            <li className="flex items-center gap-2"><FileText size={14} /> Dynamic Form Builder</li>
-                            <li className="flex items-center gap-2"><Users size={14} /> Group & Team Management</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
         </div>
       </div>
     </div>

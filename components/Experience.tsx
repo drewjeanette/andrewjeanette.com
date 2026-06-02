@@ -65,10 +65,6 @@ const involvement = [
     detail: "Provided audio and visual services using soundboards, microphones, and ProPresenter."
   },
   {
-    title: "STEM Ambassador",
-    detail: "Taught STEM concepts weekly to 50+ K-12 students through interactive classroom activities."
-  },
-  {
     title: "Intramural Sports",
     detail: "Participated in Football, Volleyball, Archery Tag, and Water Polo."
   }

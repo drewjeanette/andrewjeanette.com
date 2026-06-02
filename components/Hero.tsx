@@ -1,6 +1,6 @@
 import React from 'react';
 import { Section } from '../types';
-import { ArrowRight, Linkedin, Mail, Phone, MapPin, Target } from 'lucide-react';
+import { ArrowRight, Linkedin, Mail, Phone, MapPin } from 'lucide-react';
 
 interface HeroProps {
   navigateTo: (section: Section) => void;
@@ -90,23 +90,6 @@ const Hero: React.FC<HeroProps> = ({ navigateTo }) => {
               alt="Andrew Jeanette"
               className="relative w-48 h-48 md:w-60 md:h-60 rounded-3xl object-cover border-4 border-white dark:border-slate-700 shadow-xl"
             />
-          </div>
-        </div>
-      </div>
-
-      {/* Objective */}
-      <div className="bg-gradient-to-br from-blue-600 to-indigo-600 dark:from-blue-700 dark:to-indigo-800 rounded-2xl p-8 md:p-10 text-white shadow-lg my-8">
-        <div className="flex items-start gap-4">
-          <div className="p-2.5 bg-white/15 rounded-lg shrink-0">
-            <Target size={28} />
-          </div>
-          <div>
-            <h2 className="text-sm font-bold uppercase tracking-widest text-blue-100 mb-2">Career Objective</h2>
-            <p className="text-lg md:text-xl leading-relaxed font-light">
-              Seeking a full-time position as a System Administrator in Middle or East Tennessee
-              beginning Spring 2027, where I can apply hands-on infrastructure, network, and security
-              experience to keep organizations running securely and efficiently.
-            </p>
           </div>
         </div>
       </div>
