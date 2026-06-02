@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import {
   ArrowLeft, ArrowRight, ExternalLink, Trophy, CloudSun,
   Globe, Smartphone, MapPin, Code, BookOpen, CheckCircle, BarChart,
+  Flag, Boxes, Calendar, MousePointerClick, Camera, Filter, Zap, FileSpreadsheet,
 } from 'lucide-react';
 import QuizBowl from './tools/QuizBowl';
 
@@ -24,10 +25,46 @@ interface Project {
   techStackIcon: React.ReactNode;
   techStack: string[];
   features: Feature[];
-  cta: { label: string } & ({ type: 'link'; href: string } | { type: 'launch' });
+  cta?: { label: string } & ({ type: 'link'; href: string } | { type: 'launch' });
 }
 
 const projects: Project[] = [
+  {
+    id: 'daily-golf',
+    title: 'Daily Golf',
+    subtitle: 'Elco Dev, LLC · Jan 2026 – May 2026',
+    icon: <Flag size={32} />,
+    paragraphs: [
+      'Developed a 3D mini-golf game built in Unity 6 and C# that offers a new, globally synchronized challenge every day. Powered by a daily seed system, the course layout changes every 24 hours, ensuring all players worldwide tackle the exact same unique puzzle. The core gameplay features a custom drag-and-release shooting mechanic with visual trajectory rendering, grounded by highly tuned arcade physics that utilize custom materials to simulate realistic turf friction and kinetic wall ricochets. To enhance the player experience, I engineered a dual-camera system allowing seamless switching between a dynamic ball-tracking view and a mathematically bounded free-fly camera for level scouting. Additionally, I implemented a responsive user interface that handles real-time stroke tracking, a midnight countdown timer, and an end-of-match summary screen.',
+    ],
+    techStackLabel: 'Tech Stack',
+    techStackIcon: <Code size={18} className="text-blue-500 dark:text-blue-400" />,
+    techStack: ['Unity 6', 'C#', 'Arcade Physics', 'Custom Materials', 'UI Design'],
+    features: [
+      { icon: <Calendar size={14} />, text: 'Daily Global Synced Course' },
+      { icon: <MousePointerClick size={14} />, text: 'Drag-and-Release Shooting' },
+      { icon: <Camera size={14} />, text: 'Dual-Camera System' },
+    ],
+  },
+  {
+    id: 'inventory',
+    title: 'Web-Based Inventory Management System',
+    subtitle: 'Elco Dev, LLC · May 2025 – Jul 2025',
+    icon: <Boxes size={32} />,
+    paragraphs: [
+      'Designed and developed a web-based inventory platform to replace a manual workflow where employees printed Excel spreadsheets to track inventory. The system provides real-time access to inventory data with advanced filtering, fast search functionality, and multiple display options including a paginated table view and an infinite-scroll grid view.',
+      'Implemented database indexing and server-side caching to dramatically improve performance, enabling near-instant data loading and responsive filtering across the entire dataset. The platform also allows users to export filtered inventory results directly to Excel, improving reporting and workflow efficiency.',
+      'For demonstration purposes, the system was recreated locally using mock data generated with Faker to safely showcase functionality without exposing company data.',
+    ],
+    techStackLabel: 'Tech Stack',
+    techStackIcon: <Globe size={18} className="text-blue-500 dark:text-blue-400" />,
+    techStack: ['HTML5', 'CSS', 'JavaScript', 'Database Indexing', 'Server-Side Caching', 'Excel Export'],
+    features: [
+      { icon: <Filter size={14} />, text: 'Advanced Filtering & Search' },
+      { icon: <Zap size={14} />, text: 'Indexing + Caching Performance' },
+      { icon: <FileSpreadsheet size={14} />, text: 'Excel Export' },
+    ],
+  },
   {
     id: 'weather',
     title: 'Real-Time Weather App',
@@ -86,7 +123,7 @@ const ProjectCard: React.FC<{ project: Project; onLaunch: () => void }> = ({ pro
           <p key={i} className={`text-slate-600 dark:text-slate-300 leading-relaxed${i === 0 ? ' text-lg' : ''}`}>{p}</p>
         ))}
 
-        {project.cta.type === 'link' ? (
+        {project.cta && (project.cta.type === 'link' ? (
           <a
             href={project.cta.href}
             className="inline-flex items-center gap-2 rounded-lg bg-blue-600 hover:bg-blue-700 px-6 py-3 text-base font-semibold text-white shadow-md shadow-blue-600/20 transition-all hover:-translate-y-0.5"
@@ -102,7 +139,7 @@ const ProjectCard: React.FC<{ project: Project; onLaunch: () => void }> = ({ pro
             {project.cta.label}
             <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
           </button>
-        )}
+        ))}
       </div>
 
       <div className="md:w-1/3 bg-slate-50 dark:bg-slate-900/50 rounded-xl p-6 border border-slate-100 dark:border-slate-700">
