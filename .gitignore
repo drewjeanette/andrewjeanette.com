@@ -12,6 +12,9 @@ dist
 dist-ssr
 *.local
 
+# Generated landing-page stylesheet (built by `npm run build`)
+home/home.css
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json

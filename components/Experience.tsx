@@ -77,44 +77,44 @@ const involvement = [
 const Experience: React.FC = () => {
   return (
     <div className="max-w-5xl mx-auto animate-fade-in-up">
-      <h2 className="text-4xl font-bold text-slate-900 mb-16 text-center">Professional Experience</h2>
-      
-      <div className="space-y-12 relative before:absolute before:inset-0 before:ml-5 before:-translate-x-px md:before:mx-auto md:before:translate-x-0 before:h-full before:w-1 before:bg-slate-200">
+      <h2 className="text-4xl font-bold text-slate-900 dark:text-white mb-16 text-center">Professional Experience</h2>
+
+      <div className="space-y-12 relative before:absolute before:inset-0 before:ml-5 before:-translate-x-px md:before:mx-auto md:before:translate-x-0 before:h-full before:w-1 before:bg-slate-200 dark:before:bg-slate-700">
         {experienceData.map((item, index) => (
           <div key={item.id} className="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group is-active">
-            
+
             {/* Dot on the timeline */}
-            <div className="flex items-center justify-center w-12 h-12 rounded-full border-4 border-white bg-blue-600 text-white shadow-md shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2 z-10 transition-transform group-hover:scale-110">
+            <div className="flex items-center justify-center w-12 h-12 rounded-full border-4 border-white dark:border-slate-900 bg-blue-600 text-white shadow-md shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2 z-10 transition-transform group-hover:scale-110">
               <Briefcase size={20} className="stroke-[2.5]" />
             </div>
-            
+
             {/* Content Card */}
-            <div className="w-[calc(100%-5rem)] md:w-[calc(50%-3rem)] bg-white p-8 rounded-xl border border-slate-200 shadow-md hover:shadow-lg transition-all hover:-translate-y-1">
+            <div className="w-[calc(100%-5rem)] md:w-[calc(50%-3rem)] bg-white dark:bg-slate-800 p-8 rounded-xl border border-slate-200 dark:border-slate-700 shadow-md hover:shadow-lg transition-all hover:-translate-y-1">
               <div className="flex flex-col sm:flex-row justify-between sm:items-center mb-3">
-                <h3 className="font-bold text-xl text-slate-900">{item.role}</h3>
-                <span className="text-xs font-bold text-blue-700 bg-blue-50 border border-blue-100 px-3 py-1.5 rounded inline-block mt-2 sm:mt-0 w-fit tracking-wide uppercase">
+                <h3 className="font-bold text-xl text-slate-900 dark:text-white">{item.role}</h3>
+                <span className="text-xs font-bold text-blue-700 dark:text-blue-300 bg-blue-50 dark:bg-blue-950/50 border border-blue-100 dark:border-blue-900 px-3 py-1.5 rounded inline-block mt-2 sm:mt-0 w-fit tracking-wide uppercase">
                   {item.company}
                 </span>
               </div>
-              
-              <div className="flex flex-col gap-2 text-sm text-slate-500 mb-5 pb-4 border-b border-slate-100">
+
+              <div className="flex flex-col gap-2 text-sm text-slate-500 dark:text-slate-400 mb-5 pb-4 border-b border-slate-100 dark:border-slate-700">
                 <div className="flex items-center gap-2">
-                  <Calendar size={16} className="text-slate-400" />
+                  <Calendar size={16} className="text-slate-400 dark:text-slate-500" />
                   {item.duration}
                 </div>
                 <div className="flex items-center gap-2">
-                  <MapPin size={16} className="text-slate-400" />
+                  <MapPin size={16} className="text-slate-400 dark:text-slate-500" />
                   {item.location}
                 </div>
               </div>
-              
-              <p className="text-slate-600 mb-6 text-base leading-relaxed">
+
+              <p className="text-slate-600 dark:text-slate-300 mb-6 text-base leading-relaxed">
                 {item.description}
               </p>
 
               <div className="flex flex-wrap gap-2">
                 {item.skills.map(skill => (
-                  <span key={skill} className="px-3 py-1 bg-slate-50 text-slate-600 text-xs rounded-full border border-slate-200 font-bold">
+                  <span key={skill} className="px-3 py-1 bg-slate-50 dark:bg-slate-700 text-slate-600 dark:text-slate-200 text-xs rounded-full border border-slate-200 dark:border-slate-600 font-bold">
                     {skill}
                   </span>
                 ))}
@@ -126,17 +126,17 @@ const Experience: React.FC = () => {
 
       {/* Campus Involvement */}
       <div className="mt-24">
-        <h2 className="text-3xl font-bold text-slate-900 mb-10 text-center">Campus Involvement</h2>
+        <h2 className="text-3xl font-bold text-slate-900 dark:text-white mb-10 text-center">Campus Involvement</h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {involvement.map((item) => (
-            <div key={item.title} className="bg-white p-7 rounded-xl border border-slate-200 shadow-md hover:shadow-lg hover:-translate-y-1 transition-all">
+            <div key={item.title} className="bg-white dark:bg-slate-800 p-7 rounded-xl border border-slate-200 dark:border-slate-700 shadow-md hover:shadow-lg hover:-translate-y-1 transition-all">
               <div className="flex items-center gap-3 mb-4">
-                <div className="p-2 bg-blue-100 rounded-lg text-blue-600">
+                <div className="p-2 bg-blue-100 dark:bg-blue-900/50 rounded-lg text-blue-600 dark:text-blue-300">
                   <Users size={22} />
                 </div>
-                <h3 className="font-bold text-lg text-slate-900 leading-tight">{item.title}</h3>
+                <h3 className="font-bold text-lg text-slate-900 dark:text-white leading-tight">{item.title}</h3>
               </div>
-              <p className="text-slate-600 leading-relaxed text-sm">{item.detail}</p>
+              <p className="text-slate-600 dark:text-slate-300 leading-relaxed text-sm">{item.detail}</p>
             </div>
           ))}
         </div>

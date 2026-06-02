@@ -38,15 +38,15 @@ const WeatherAppDetail: React.FC = () => {
   ];
 
   return (
-    <div className="max-w-3xl mx-auto bg-white p-8 md:p-10 rounded-2xl border border-slate-200 shadow-md">
+    <div className="max-w-3xl mx-auto bg-white dark:bg-slate-800 p-8 md:p-10 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-md">
       <div className="flex items-center gap-4 mb-6">
-        <div className="p-3 bg-blue-100 rounded-xl text-blue-600">
+        <div className="p-3 bg-blue-100 dark:bg-blue-900/50 rounded-xl text-blue-600 dark:text-blue-300">
           <CloudSun size={32} />
         </div>
-        <h2 className="text-3xl font-bold text-slate-900">Weather App</h2>
+        <h2 className="text-3xl font-bold text-slate-900 dark:text-white">Weather App</h2>
       </div>
 
-      <div className="space-y-4 text-slate-600 leading-relaxed">
+      <div className="space-y-4 text-slate-600 dark:text-slate-300 leading-relaxed">
         <p>
           I built a real-time Weather App that uses your device's location, or any
           location you enter, and displays live weather conditions and an
@@ -59,10 +59,10 @@ const WeatherAppDetail: React.FC = () => {
         </p>
       </div>
 
-      <h3 className="font-bold text-slate-900 mt-8 mb-3">Some of the tools and APIs I used:</h3>
+      <h3 className="font-bold text-slate-900 dark:text-white mt-8 mb-3">Some of the tools and APIs I used:</h3>
       <ul className="space-y-2 mb-8">
         {tools.map((tool) => (
-          <li key={tool} className="flex items-center gap-3 text-slate-600">
+          <li key={tool} className="flex items-center gap-3 text-slate-600 dark:text-slate-300">
             <span className="w-1.5 h-1.5 rounded-full bg-blue-500 shrink-0"></span>
             {tool}
           </li>
@@ -100,8 +100,8 @@ const ProjectsSection: React.FC = () => {
         /* Dashboard Grid View */
         <div>
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-slate-900 mb-4">Projects</h2>
-            <p className="text-slate-500 text-lg max-w-2xl mx-auto">
+            <h2 className="text-4xl font-bold text-slate-900 dark:text-white mb-4">Projects</h2>
+            <p className="text-slate-500 dark:text-slate-400 text-lg max-w-2xl mx-auto">
               A collection of applications I've designed and built, spanning web
               development and interactive tools.
             </p>
@@ -112,19 +112,19 @@ const ProjectsSection: React.FC = () => {
               <button
                 key={project.id}
                 onClick={() => setActiveProjectId(project.id)}
-                className="group relative flex flex-col items-center justify-center p-6 bg-white rounded-2xl border border-slate-200 aspect-square hover:border-blue-400 hover:shadow-xl transition-all duration-300 text-center overflow-hidden"
+                className="group relative flex flex-col items-center justify-center p-6 bg-white dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700 aspect-square hover:border-blue-400 dark:hover:border-blue-500 hover:shadow-xl transition-all duration-300 text-center overflow-hidden"
               >
                 {/* Background Hover Effect */}
-                <div className="absolute inset-0 bg-gradient-to-br from-blue-50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                <div className="absolute inset-0 bg-gradient-to-br from-blue-50 dark:from-blue-950/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
 
                 <div className="relative z-10 flex flex-col items-center h-full justify-center">
-                  <div className="mb-6 text-blue-500 group-hover:scale-110 transition-transform duration-300">
+                  <div className="mb-6 text-blue-500 dark:text-blue-400 group-hover:scale-110 transition-transform duration-300">
                     {project.icon}
                   </div>
 
-                  <h3 className="text-xl font-bold text-slate-900 mb-3 group-hover:text-blue-700 transition-colors">{project.name}</h3>
+                  <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-3 group-hover:text-blue-700 dark:group-hover:text-blue-300 transition-colors">{project.name}</h3>
 
-                  <p className="text-slate-500 text-sm leading-relaxed mb-6 px-2 opacity-80 group-hover:opacity-100 transition-opacity line-clamp-3">
+                  <p className="text-slate-500 dark:text-slate-400 text-sm leading-relaxed mb-6 px-2 opacity-80 group-hover:opacity-100 transition-opacity line-clamp-3">
                     {project.description}
                   </p>
 
@@ -142,7 +142,7 @@ const ProjectsSection: React.FC = () => {
           <div className="max-w-7xl mx-auto mb-8">
             <button
               onClick={() => setActiveProjectId(null)}
-              className="flex items-center gap-2 text-slate-500 hover:text-blue-600 transition-colors font-bold uppercase tracking-wide text-sm group py-2 px-4 rounded-lg hover:bg-white border border-transparent hover:border-slate-200 w-fit"
+              className="flex items-center gap-2 text-slate-500 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors font-bold uppercase tracking-wide text-sm group py-2 px-4 rounded-lg hover:bg-white dark:hover:bg-slate-800 border border-transparent hover:border-slate-200 dark:hover:border-slate-700 w-fit"
             >
               <ArrowLeft size={18} className="group-hover:-translate-x-1 transition-transform" />
               Back to Projects

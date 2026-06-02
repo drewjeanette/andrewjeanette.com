@@ -32,15 +32,15 @@ const Hero: React.FC<HeroProps> = ({ navigateTo }) => {
       {/* Intro */}
       <div className="flex flex-col-reverse md:flex-row items-center gap-12 py-12 md:py-16">
         <div className="flex-1 space-y-6 text-center md:text-left">
-          <div className="inline-block px-4 py-1.5 bg-blue-50 border border-blue-100 text-blue-600 font-bold rounded-full text-sm shadow-sm">
+          <div className="inline-block px-4 py-1.5 bg-blue-50 dark:bg-blue-950/50 border border-blue-100 dark:border-blue-900 text-blue-600 dark:text-blue-300 font-bold rounded-full text-sm shadow-sm">
             IT Administrator • City of Algood
           </div>
 
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-slate-900 leading-tight">
-            Hi, I'm <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-600">Andrew Jeanette</span>
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-slate-900 dark:text-white leading-tight">
+            Hi, I'm <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-600 dark:from-blue-400 dark:to-indigo-400">Andrew Jeanette</span>
           </h1>
 
-          <p className="text-lg md:text-xl text-slate-600 leading-relaxed font-light">
+          <p className="text-lg md:text-xl text-slate-600 dark:text-slate-300 leading-relaxed font-light">
             I am a Business Information Technology major with a Computer Science minor at Tennessee
             Technological University, currently serving as the IT Administrator for the City of Algood.
             I specialize in bridging business strategy and technical implementation across system,
@@ -60,7 +60,7 @@ const Hero: React.FC<HeroProps> = ({ navigateTo }) => {
               href="https://www.linkedin.com/in/andrew-jeanette"
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-2 bg-white hover:bg-slate-50 border border-slate-200 hover:border-blue-300 hover:text-blue-600 text-slate-700 font-medium py-3.5 px-7 rounded-lg transition-all shadow-sm"
+              className="flex items-center gap-2 bg-white dark:bg-slate-800 hover:bg-slate-50 dark:hover:bg-slate-700 border border-slate-200 dark:border-slate-700 hover:border-blue-300 dark:hover:border-blue-500 hover:text-blue-600 dark:hover:text-blue-400 text-slate-700 dark:text-slate-200 font-medium py-3.5 px-7 rounded-lg transition-all shadow-sm"
             >
               <Linkedin size={20} />
               LinkedIn
@@ -68,11 +68,11 @@ const Hero: React.FC<HeroProps> = ({ navigateTo }) => {
           </div>
 
           {/* Contact row */}
-          <div className="pt-4 flex flex-wrap gap-x-6 gap-y-3 justify-center md:justify-start text-sm text-slate-500">
-            <a href="mailto:andrewjeanettebusiness@gmail.com" className="flex items-center gap-2 hover:text-blue-600 transition-colors">
+          <div className="pt-4 flex flex-wrap gap-x-6 gap-y-3 justify-center md:justify-start text-sm text-slate-500 dark:text-slate-400">
+            <a href="mailto:andrewjeanettebusiness@gmail.com" className="flex items-center gap-2 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
               <Mail size={16} /> andrewjeanettebusiness@gmail.com
             </a>
-            <a href="tel:+16157666373" className="flex items-center gap-2 hover:text-blue-600 transition-colors">
+            <a href="tel:+16157666373" className="flex items-center gap-2 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
               <Phone size={16} /> (615) 766-6373
             </a>
             <span className="flex items-center gap-2">
@@ -88,14 +88,14 @@ const Hero: React.FC<HeroProps> = ({ navigateTo }) => {
             <img
               src={`${import.meta.env.BASE_URL}profile.png`}
               alt="Andrew Jeanette"
-              className="relative w-48 h-48 md:w-60 md:h-60 rounded-3xl object-cover border-4 border-white shadow-xl"
+              className="relative w-48 h-48 md:w-60 md:h-60 rounded-3xl object-cover border-4 border-white dark:border-slate-700 shadow-xl"
             />
           </div>
         </div>
       </div>
 
       {/* Objective */}
-      <div className="bg-gradient-to-br from-blue-600 to-indigo-600 rounded-2xl p-8 md:p-10 text-white shadow-lg my-8">
+      <div className="bg-gradient-to-br from-blue-600 to-indigo-600 dark:from-blue-700 dark:to-indigo-800 rounded-2xl p-8 md:p-10 text-white shadow-lg my-8">
         <div className="flex items-start gap-4">
           <div className="p-2.5 bg-white/15 rounded-lg shrink-0">
             <Target size={28} />
@@ -113,22 +113,22 @@ const Hero: React.FC<HeroProps> = ({ navigateTo }) => {
 
       {/* Skills */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6 my-12">
-        <div className="bg-white rounded-xl border border-slate-200 p-8 shadow-md hover:shadow-lg transition-shadow">
-          <h3 className="text-xl font-bold text-slate-900 mb-5 border-l-4 border-blue-600 pl-3">Technical Skills</h3>
+        <div className="bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 p-8 shadow-md hover:shadow-lg transition-shadow">
+          <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-5 border-l-4 border-blue-600 pl-3">Technical Skills</h3>
           <div className="flex flex-wrap gap-2">
             {technicalSkills.map(skill => (
-              <span key={skill} className="px-3 py-1.5 bg-blue-50 text-blue-700 border border-blue-100 text-sm rounded-full font-semibold">
+              <span key={skill} className="px-3 py-1.5 bg-blue-50 dark:bg-blue-950/50 text-blue-700 dark:text-blue-300 border border-blue-100 dark:border-blue-900 text-sm rounded-full font-semibold">
                 {skill}
               </span>
             ))}
           </div>
         </div>
 
-        <div className="bg-white rounded-xl border border-slate-200 p-8 shadow-md hover:shadow-lg transition-shadow">
-          <h3 className="text-xl font-bold text-slate-900 mb-5 border-l-4 border-indigo-500 pl-3">Professional Skills</h3>
+        <div className="bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 p-8 shadow-md hover:shadow-lg transition-shadow">
+          <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-5 border-l-4 border-indigo-500 pl-3">Professional Skills</h3>
           <div className="flex flex-wrap gap-2">
             {softSkills.map(skill => (
-              <span key={skill} className="px-3 py-1.5 bg-slate-50 text-slate-700 border border-slate-200 text-sm rounded-full font-semibold">
+              <span key={skill} className="px-3 py-1.5 bg-slate-50 dark:bg-slate-700 text-slate-700 dark:text-slate-200 border border-slate-200 dark:border-slate-600 text-sm rounded-full font-semibold">
                 {skill}
               </span>
             ))}

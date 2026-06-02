@@ -183,28 +183,28 @@ const QuizBowl: React.FC = () => {
     return (
       <div className="max-w-6xl mx-auto">
         <div className="text-center mb-10">
-          <h2 className="text-3xl font-bold text-slate-900 mb-2">Select a Subject</h2>
-          <p className="text-slate-500">Choose a class category to test your knowledge.</p>
+          <h2 className="text-3xl font-bold text-slate-900 dark:text-white mb-2">Select a Subject</h2>
+          <p className="text-slate-500 dark:text-slate-400">Choose a class category to test your knowledge.</p>
         </div>
-        
+
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {QUIZ_DATA.map((category) => (
             <button
               key={category.id}
               onClick={() => handleCategorySelect(category)}
-              className="bg-white p-6 rounded-xl border border-slate-200 shadow-sm hover:shadow-md hover:border-blue-400 transition-all text-left group flex flex-col h-full"
+              className="bg-white dark:bg-slate-800 p-6 rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm hover:shadow-md hover:border-blue-400 dark:hover:border-blue-500 transition-all text-left group flex flex-col h-full"
             >
               <div className="flex items-start justify-between mb-4">
-                <div className="p-3 bg-blue-50 rounded-lg group-hover:bg-blue-100 transition-colors">
-                  <div className="text-blue-600">
+                <div className="p-3 bg-blue-50 dark:bg-blue-950/50 rounded-lg group-hover:bg-blue-100 dark:group-hover:bg-blue-900/50 transition-colors">
+                  <div className="text-blue-600 dark:text-blue-300">
                     {category.icon}
                   </div>
                 </div>
-                <ChevronRight className="text-slate-300 group-hover:text-blue-500 transition-colors" />
+                <ChevronRight className="text-slate-300 dark:text-slate-600 group-hover:text-blue-500 transition-colors" />
               </div>
-              <h3 className="text-xl font-bold text-slate-900 mb-2">{category.title}</h3>
-              <p className="text-slate-500 text-sm mb-4 flex-grow">{category.description}</p>
-              <div className="text-xs font-bold uppercase tracking-wider text-slate-400">10 Questions</div>
+              <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-2">{category.title}</h3>
+              <p className="text-slate-500 dark:text-slate-400 text-sm mb-4 flex-grow">{category.description}</p>
+              <div className="text-xs font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500">10 Questions</div>
             </button>
           ))}
         </div>
@@ -214,20 +214,20 @@ const QuizBowl: React.FC = () => {
 
   // RENDER: Active Quiz Interface
   return (
-    <div className="max-w-3xl mx-auto bg-white p-8 md:p-10 rounded-xl shadow-lg border border-slate-200">
+    <div className="max-w-3xl mx-auto bg-white dark:bg-slate-800 p-8 md:p-10 rounded-xl shadow-lg border border-slate-200 dark:border-slate-700">
       {/* Header / Back Button */}
-      <div className="flex items-center justify-between mb-8 border-b border-slate-100 pb-6">
+      <div className="flex items-center justify-between mb-8 border-b border-slate-100 dark:border-slate-700 pb-6">
         <div className="flex items-center gap-4">
-          <div className="p-2 bg-blue-50 rounded-lg hidden sm:block">
-            <div className="text-blue-600">
+          <div className="p-2 bg-blue-50 dark:bg-blue-950/50 rounded-lg hidden sm:block">
+            <div className="text-blue-600 dark:text-blue-300">
               {activeCategory.icon}
             </div>
           </div>
           <div>
-            <h2 className="text-xl sm:text-2xl font-bold text-slate-900">{activeCategory.title}</h2>
-            <button 
+            <h2 className="text-xl sm:text-2xl font-bold text-slate-900 dark:text-white">{activeCategory.title}</h2>
+            <button
               onClick={handleBackToCategories}
-              className="text-xs font-bold text-slate-500 hover:text-blue-600 flex items-center gap-1 mt-1 uppercase tracking-wide transition-colors"
+              className="text-xs font-bold text-slate-500 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-400 flex items-center gap-1 mt-1 uppercase tracking-wide transition-colors"
             >
               <ArrowLeft size={12} /> Change Category
             </button>
@@ -239,14 +239,14 @@ const QuizBowl: React.FC = () => {
         <div className="text-center py-8 animate-fade-in">
           <div className="mb-6 relative inline-block">
             <Trophy size={80} className="mx-auto text-yellow-400 drop-shadow-md" />
-            <div className={`absolute -bottom-2 -right-2 w-10 h-10 rounded-full flex items-center justify-center text-white font-bold border-4 border-white ${score >= 7 ? 'bg-green-500' : 'bg-slate-400'}`}>
+            <div className={`absolute -bottom-2 -right-2 w-10 h-10 rounded-full flex items-center justify-center text-white font-bold border-4 border-white dark:border-slate-800 ${score >= 7 ? 'bg-green-500' : 'bg-slate-400'}`}>
                 {Math.round((score / activeCategory.questions.length) * 100)}%
             </div>
           </div>
-          
-          <h3 className="text-3xl font-bold text-slate-900 mb-2">Quiz Complete!</h3>
-          <p className="text-slate-500 mb-8">
-            You scored <span className="font-bold text-slate-900">{score}</span> out of {activeCategory.questions.length}
+
+          <h3 className="text-3xl font-bold text-slate-900 dark:text-white mb-2">Quiz Complete!</h3>
+          <p className="text-slate-500 dark:text-slate-400 mb-8">
+            You scored <span className="font-bold text-slate-900 dark:text-white">{score}</span> out of {activeCategory.questions.length}
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -259,7 +259,7 @@ const QuizBowl: React.FC = () => {
             </button>
             <button
               onClick={handleBackToCategories}
-              className="flex items-center justify-center gap-2 px-6 py-3 bg-white hover:bg-slate-50 text-slate-700 border border-slate-200 rounded-lg transition-colors font-bold shadow-sm"
+              className="flex items-center justify-center gap-2 px-6 py-3 bg-white dark:bg-slate-700 hover:bg-slate-50 dark:hover:bg-slate-600 text-slate-700 dark:text-slate-200 border border-slate-200 dark:border-slate-600 rounded-lg transition-colors font-bold shadow-sm"
             >
               <BookOpen size={20} />
               Choose Subject
@@ -270,11 +270,11 @@ const QuizBowl: React.FC = () => {
         <div className="animate-fade-in">
           {/* Progress */}
           <div className="mb-8">
-            <div className="flex justify-between text-xs font-bold uppercase tracking-wider text-slate-500 mb-2">
+            <div className="flex justify-between text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400 mb-2">
               <span>Question {currentQuestion + 1} of {activeCategory.questions.length}</span>
               <span>Score: {score}</span>
             </div>
-            <div className="w-full bg-slate-100 rounded-full h-2.5 overflow-hidden">
+            <div className="w-full bg-slate-100 dark:bg-slate-700 rounded-full h-2.5 overflow-hidden">
               <div 
                 className="bg-blue-600 h-full rounded-full transition-all duration-500 ease-out" 
                 style={{ width: `${((currentQuestion + 1) / activeCategory.questions.length) * 100}%` }}
@@ -283,7 +283,7 @@ const QuizBowl: React.FC = () => {
           </div>
 
           {/* Question Text */}
-          <h3 className="text-xl md:text-2xl font-bold text-slate-900 mb-8 leading-snug min-h-[4rem]">
+          <h3 className="text-xl md:text-2xl font-bold text-slate-900 dark:text-white mb-8 leading-snug min-h-[4rem]">
             {activeCategory.questions[currentQuestion].text}
           </h3>
 
@@ -297,16 +297,16 @@ const QuizBowl: React.FC = () => {
               
               if (selectedOption === null) {
                 // Default State
-                buttonClass += "border-slate-200 bg-white hover:border-blue-300 hover:bg-blue-50/50 text-slate-700";
+                buttonClass += "border-slate-200 dark:border-slate-600 bg-white dark:bg-slate-700/50 hover:border-blue-300 dark:hover:border-blue-500 hover:bg-blue-50/50 dark:hover:bg-blue-950/40 text-slate-700 dark:text-slate-200";
               } else if (isCorrectAnswer) {
                 // Correct Answer State (Always show correct answer when reveal happens)
-                buttonClass += "border-green-500 bg-green-50 text-green-800 shadow-sm z-10";
+                buttonClass += "border-green-500 bg-green-50 dark:bg-green-950/50 text-green-800 dark:text-green-300 shadow-sm z-10";
               } else if (isSelected && !isCorrectAnswer) {
                 // Wrong Selection State
-                buttonClass += "border-red-500 bg-red-50 text-red-800 shadow-sm z-10";
+                buttonClass += "border-red-500 bg-red-50 dark:bg-red-950/50 text-red-800 dark:text-red-300 shadow-sm z-10";
               } else {
                 // Dim other answers
-                buttonClass += "border-slate-100 bg-slate-50 text-slate-400 opacity-50";
+                buttonClass += "border-slate-100 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-slate-400 dark:text-slate-500 opacity-50";
               }
 
               return (
