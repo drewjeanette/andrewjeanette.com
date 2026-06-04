@@ -3,7 +3,7 @@
 // to a static stylesheet so its dark-mode toggle is instant (no runtime CDN).
 export default {
   darkMode: 'class',
-  content: ['./home/index.html'],
+  content: ['./home/index.html', './canon/**/*.html'],
   theme: { extend: {} },
   plugins: [],
 };

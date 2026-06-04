@@ -7,10 +7,12 @@ import react from '@vitejs/plugin-react';
 // built, so they sit alongside it:
 //   - home/         -> dist/             (root "/" landing page)
 //   - weatherapp/   -> dist/portfolio/weatherapp/  ("/portfolio/weatherapp/")
+//   - canon/        -> dist/canon/                 ("/canon/...")
 function copyStaticPages(): Plugin {
   const copies = [
     { from: 'home', to: 'dist' },
     { from: 'weatherapp', to: 'dist/portfolio/weatherapp' },
+    { from: 'canon', to: 'dist/canon' },
   ];
   return {
     name: 'copy-static-pages',
