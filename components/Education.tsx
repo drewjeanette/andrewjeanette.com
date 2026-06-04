@@ -8,7 +8,7 @@ const educationData: EducationItem[] = [
     school: "Tennessee Technological University",
     degree: "Bachelor of Science in Business Administration",
     graduation: "December 2026",
-    gpa: "3.49",
+    gpa: "3.55",
     details: [
       "Major: Business Information Technology",
       "Minor: Computer Science",
