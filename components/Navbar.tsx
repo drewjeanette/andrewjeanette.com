@@ -7,19 +7,19 @@ interface NavbarProps {
   setActiveSection: (section: Section) => void;
 }
 
+const navItems = [
+  { label: 'About', value: Section.HOME },
+  { label: 'Experience', value: Section.EXPERIENCE },
+  { label: 'Projects', value: Section.PROJECTS },
+  { label: 'Education', value: Section.EDUCATION },
+];
+
 const Navbar: React.FC<NavbarProps> = ({ activeSection, setActiveSection }) => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   // Initialized from the class set by the anti-flash script in index.html.
   const [isDark, setIsDark] = useState<boolean>(
     () => typeof document !== 'undefined' && document.documentElement.classList.contains('dark')
   );
-
-  const navItems = [
-    { label: 'Home / About Me', value: Section.HOME },
-    { label: 'Education', value: Section.EDUCATION },
-    { label: 'Experience', value: Section.EXPERIENCE },
-    { label: 'Projects', value: Section.PROJECTS },
-  ];
 
   const handleNavClick = (value: Section) => {
     setActiveSection(value);
@@ -30,92 +30,91 @@ const Navbar: React.FC<NavbarProps> = ({ activeSection, setActiveSection }) => {
   const toggleTheme = () => {
     setIsDark((prev) => {
       const next = !prev;
-      const root = document.documentElement;
-      if (next) {
-        root.classList.add('dark');
-        localStorage.setItem('theme', 'dark');
-      } else {
-        root.classList.remove('dark');
-        localStorage.setItem('theme', 'light');
-      }
+      document.documentElement.classList.toggle('dark', next);
+      try {
+        localStorage.setItem('theme', next ? 'dark' : 'light');
+      } catch {}
       return next;
     });
   };
 
-  const ThemeToggle: React.FC<{ className?: string }> = ({ className = '' }) => (
-    <button
-      onClick={toggleTheme}
-      aria-label={isDark ? 'Switch to light mode' : 'Switch to dark mode'}
-      title={isDark ? 'Switch to light mode' : 'Switch to dark mode'}
-      className={`p-2 rounded-lg text-slate-500 dark:text-slate-300 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-slate-100 dark:hover:bg-slate-700 transition-colors ${className}`}
-    >
-      {isDark ? <Sun size={20} /> : <Moon size={20} />}
-    </button>
-  );
+  const themeLabel = isDark ? 'Switch to light mode' : 'Switch to dark mode';
 
   return (
-    <nav className="fixed top-0 left-0 right-0 bg-white/90 dark:bg-slate-800/90 backdrop-blur-md border-b border-slate-200 dark:border-slate-700 shadow-sm z-50 transition-colors duration-300">
-      <div className="container mx-auto px-4">
-        <div className="flex justify-between items-center h-20">
-          <div
-            className="font-bold text-2xl cursor-pointer tracking-tight text-slate-900 dark:text-white hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
-            onClick={() => handleNavClick(Section.HOME)}
-          >
-            Andrew Jeanette
-          </div>
+    <nav className="sticky top-0 z-50 border-b border-line bg-canvas/80 backdrop-blur-xl backdrop-saturate-150">
+      <div className="mx-auto flex h-14 max-w-5xl items-center justify-between px-5 md:px-8">
+        <button
+          onClick={() => handleNavClick(Section.HOME)}
+          className="flex items-center gap-2.5 text-sm font-medium text-fg"
+        >
+          <span className="flex h-6 w-6 items-center justify-center rounded-md bg-fg font-mono text-[10px] font-medium text-canvas">
+            AJ
+          </span>
+          Andrew Jeanette
+        </button>
 
-          {/* Desktop Menu */}
-          <div className="hidden md:flex items-center space-x-8">
-            {navItems.map((item) => (
-              <button
-                key={item.value}
-                onClick={() => handleNavClick(item.value)}
-                className={`text-sm font-semibold transition-all duration-300 relative group uppercase tracking-wider ${
-                  activeSection === item.value
-                    ? 'text-blue-600 dark:text-blue-400'
-                    : 'text-slate-500 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white'
-                }`}
-              >
-                {item.label}
-                <span className={`absolute -bottom-1 left-0 w-full h-0.5 bg-blue-600 dark:bg-blue-400 transform transition-transform duration-300 ${
-                  activeSection === item.value ? 'scale-x-100' : 'scale-x-0 group-hover:scale-x-100'
-                }`}></span>
-              </button>
-            ))}
-            <ThemeToggle />
-          </div>
-
-          {/* Mobile Menu Button */}
-          <div className="md:hidden flex items-center gap-1">
-            <ThemeToggle />
+        <div className="hidden items-center gap-1 md:flex">
+          {navItems.map((item) => (
             <button
-              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="text-slate-700 dark:text-slate-200 focus:outline-none p-2 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
+              key={item.value}
+              onClick={() => handleNavClick(item.value)}
+              aria-current={activeSection === item.value ? 'page' : undefined}
+              className={`rounded-md px-3 py-1.5 text-sm transition-colors ${
+                activeSection === item.value
+                  ? 'bg-raised text-fg'
+                  : 'text-muted hover:text-fg'
+              }`}
             >
-              {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+              {item.label}
             </button>
-          </div>
+          ))}
+          <span className="mx-2 h-4 w-px bg-line" aria-hidden="true" />
+          <a href="mailto:andrewjeanettebusiness@gmail.com" className="rounded-md px-3 py-1.5 text-sm text-muted transition-colors hover:text-fg">
+            Contact
+          </a>
+          <button
+            onClick={toggleTheme}
+            aria-label={themeLabel}
+            title={themeLabel}
+            className="ml-1 flex h-8 w-8 items-center justify-center rounded-md border border-line text-muted transition-colors hover:border-line-strong hover:text-fg"
+          >
+            {isDark ? <Sun size={15} /> : <Moon size={15} />}
+          </button>
+        </div>
+
+        <div className="flex items-center gap-1 md:hidden">
+          <button
+            onClick={toggleTheme}
+            aria-label={themeLabel}
+            className="flex h-9 w-9 items-center justify-center rounded-md text-muted hover:text-fg"
+          >
+            {isDark ? <Sun size={17} /> : <Moon size={17} />}
+          </button>
+          <button
+            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            aria-label={isMobileMenuOpen ? 'Close menu' : 'Open menu'}
+            aria-expanded={isMobileMenuOpen}
+            className="flex h-9 w-9 items-center justify-center rounded-md text-fg"
+          >
+            {isMobileMenuOpen ? <X size={19} /> : <Menu size={19} />}
+          </button>
         </div>
       </div>
 
-      {/* Mobile Menu Dropdown */}
       {isMobileMenuOpen && (
-        <div className="md:hidden bg-white dark:bg-slate-800 border-b border-slate-200 dark:border-slate-700 px-4 pt-2 pb-6 shadow-xl">
-          <div className="flex flex-col space-y-3">
-            {navItems.map((item) => (
-              <button
-                key={item.value}
-                onClick={() => handleNavClick(item.value)}
-                className={`text-left py-3 px-4 rounded transition-colors ${
-                  activeSection === item.value
-                    ? 'bg-blue-50 dark:bg-blue-950/50 text-blue-600 dark:text-blue-400 font-bold border-l-4 border-blue-600 dark:border-blue-400'
-                    : 'text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-700'
-                }`}
-              >
-                {item.label}
-              </button>
-            ))}
-          </div>
+        <div className="animate-fade-in border-t border-line bg-canvas px-5 py-3 md:hidden">
+          {navItems.map((item) => (
+            <button
+              key={item.value}
+              onClick={() => handleNavClick(item.value)}
+              className={`flex w-full items-center justify-between border-b border-line py-3.5 text-left text-[15px] last:border-0 ${
+                activeSection === item.value ? 'text-fg' : 'text-muted'
+              }`}
+            >
+              {item.label}
+              {activeSection === item.value && <span className="h-1.5 w-1.5 rounded-full bg-fg" />}
+            </button>
+          ))}
         </div>
       )}
     </nav>

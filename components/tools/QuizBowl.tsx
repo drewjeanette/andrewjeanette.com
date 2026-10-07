@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Trophy, AlertCircle, CheckCircle, RefreshCw, BookOpen, ChevronRight, ArrowLeft, BarChart, Database, Code, Users, Briefcase, DollarSign } from 'lucide-react';
+import { AlertCircle, CheckCircle, RefreshCw, BookOpen, ChevronRight, ArrowLeft, BarChart, Database, Code, Users, Briefcase, DollarSign } from 'lucide-react';
 
 interface Question {
   id: number;
@@ -20,7 +20,7 @@ const QUIZ_DATA: QuizCategory[] = [
   {
     id: 'app-dev',
     title: 'Business App Development',
-    icon: <Code size={32} />,
+    icon: <Code size={18} />,
     description: 'Test your knowledge on SDLC, Programming logic, and Web Technologies.',
     questions: [
       { id: 1, text: "What does IDE stand for in software development?", options: ["Integrated Development Environment", "Internal Data Exchange", "Internet Development Engine", "Interface Design Element"], correctAnswer: 0 },
@@ -38,7 +38,7 @@ const QUIZ_DATA: QuizCategory[] = [
   {
     id: 'finance',
     title: 'Principles of Finance',
-    icon: <DollarSign size={32} />,
+    icon: <DollarSign size={18} />,
     description: 'Questions on TVM, Financial Statements, and Risk Analysis.',
     questions: [
       { id: 1, text: "What is the formula for Net Income?", options: ["Assets - Liabilities", "Revenue - Expenses", "Cash + Receivables", "Equity - Debt"], correctAnswer: 1 },
@@ -56,7 +56,7 @@ const QUIZ_DATA: QuizCategory[] = [
   {
     id: 'db-mgmt',
     title: 'Business Database Mgmt',
-    icon: <Database size={32} />,
+    icon: <Database size={18} />,
     description: 'SQL commands, Normalization, and ERD concepts.',
     questions: [
       { id: 1, text: "Which SQL command is used to retrieve data from a table?", options: ["GET", "SELECT", "FETCH", "PULL"], correctAnswer: 1 },
@@ -74,7 +74,7 @@ const QUIZ_DATA: QuizCategory[] = [
   {
     id: 'stats',
     title: 'Business Statistics',
-    icon: <BarChart size={32} />,
+    icon: <BarChart size={18} />,
     description: 'Probability, Distributions, and Hypothesis Testing.',
     questions: [
       { id: 1, text: "Which measure represents the central value of a sorted dataset?", options: ["Mean", "Mode", "Median", "Range"], correctAnswer: 2 },
@@ -92,7 +92,7 @@ const QUIZ_DATA: QuizCategory[] = [
   {
     id: 'marketing',
     title: 'Principles of Marketing',
-    icon: <Users size={32} />,
+    icon: <Users size={18} />,
     description: 'The 4 Ps, SWOT, and Consumer Behavior.',
     questions: [
       { id: 1, text: "Which of the following is NOT one of the 4 Ps of Marketing?", options: ["Product", "Price", "Place", "Planning"], correctAnswer: 3 },
@@ -110,7 +110,7 @@ const QUIZ_DATA: QuizCategory[] = [
   {
     id: 'mgmt',
     title: 'Business Management: OB',
-    icon: <Briefcase size={32} />,
+    icon: <Briefcase size={18} />,
     description: 'Leadership, Motivation, and Organizational Culture.',
     questions: [
       { id: 1, text: "Which need is at the bottom of Maslow's Hierarchy of Needs?", options: ["Safety", "Self-Actualization", "Physiological", "Esteem"], correctAnswer: 2 },
@@ -181,30 +181,29 @@ const QuizBowl: React.FC = () => {
   // RENDER: Category Selection Grid
   if (!activeCategory) {
     return (
-      <div className="max-w-6xl mx-auto">
-        <div className="text-center mb-10">
-          <h2 className="text-3xl font-bold text-slate-900 dark:text-white mb-2">Select a Subject</h2>
-          <p className="text-slate-500 dark:text-slate-400">Choose a class category to test your knowledge.</p>
-        </div>
+      <div>
+        <header className="mb-12 max-w-2xl">
+          <p className="eyebrow mb-4">Quiz Bowl</p>
+          <h1 className="text-3xl font-semibold tracking-tightest text-fg md:text-[2.75rem] md:leading-[1.1]">Choose a subject</h1>
+          <p className="mt-4 text-base leading-relaxed text-muted md:text-lg">Ten questions per category, with instant feedback and live scoring.</p>
+        </header>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid gap-px overflow-hidden rounded-xl border border-line bg-line sm:grid-cols-2 lg:grid-cols-3">
           {QUIZ_DATA.map((category) => (
             <button
               key={category.id}
               onClick={() => handleCategorySelect(category)}
-              className="bg-white dark:bg-slate-800 p-6 rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm hover:shadow-md hover:border-blue-400 dark:hover:border-blue-500 transition-all text-left group flex flex-col h-full"
+              className="group flex h-full flex-col bg-canvas p-6 text-left transition-colors hover:bg-surface"
             >
-              <div className="flex items-start justify-between mb-4">
-                <div className="p-3 bg-blue-50 dark:bg-blue-950/50 rounded-lg group-hover:bg-blue-100 dark:group-hover:bg-blue-900/50 transition-colors">
-                  <div className="text-blue-600 dark:text-blue-300">
-                    {category.icon}
-                  </div>
-                </div>
-                <ChevronRight className="text-slate-300 dark:text-slate-600 group-hover:text-blue-500 transition-colors" />
+              <div className="mb-8 flex items-center justify-between">
+                <span className="flex h-9 w-9 items-center justify-center rounded-lg border border-line text-muted transition-colors group-hover:text-fg">
+                  {category.icon}
+                </span>
+                <ChevronRight size={16} className="text-subtle transition-all group-hover:translate-x-0.5 group-hover:text-fg" />
               </div>
-              <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-2">{category.title}</h3>
-              <p className="text-slate-500 dark:text-slate-400 text-sm mb-4 flex-grow">{category.description}</p>
-              <div className="text-xs font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500">10 Questions</div>
+              <h2 className="text-[15px] font-medium text-fg">{category.title}</h2>
+              <p className="mt-1.5 flex-grow text-sm leading-relaxed text-muted">{category.description}</p>
+              <p className="mt-6 font-mono text-[11px] uppercase tracking-[0.12em] text-subtle">{category.questions.length} questions</p>
             </button>
           ))}
         </div>
@@ -212,101 +211,84 @@ const QuizBowl: React.FC = () => {
     );
   }
 
+  const total = activeCategory.questions.length;
+  const question = activeCategory.questions[currentQuestion];
+
   // RENDER: Active Quiz Interface
   return (
-    <div className="max-w-3xl mx-auto bg-white dark:bg-slate-800 p-8 md:p-10 rounded-xl shadow-lg border border-slate-200 dark:border-slate-700">
-      {/* Header / Back Button */}
-      <div className="flex items-center justify-between mb-8 border-b border-slate-100 dark:border-slate-700 pb-6">
-        <div className="flex items-center gap-4">
-          <div className="p-2 bg-blue-50 dark:bg-blue-950/50 rounded-lg hidden sm:block">
-            <div className="text-blue-600 dark:text-blue-300">
-              {activeCategory.icon}
-            </div>
-          </div>
-          <div>
-            <h2 className="text-xl sm:text-2xl font-bold text-slate-900 dark:text-white">{activeCategory.title}</h2>
-            <button
-              onClick={handleBackToCategories}
-              className="text-xs font-bold text-slate-500 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-400 flex items-center gap-1 mt-1 uppercase tracking-wide transition-colors"
-            >
-              <ArrowLeft size={12} /> Change Category
-            </button>
-          </div>
+    <div className="panel mx-auto max-w-2xl overflow-hidden">
+      <div className="flex items-center justify-between gap-4 border-b border-line bg-surface px-6 py-4">
+        <div className="flex min-w-0 items-center gap-3">
+          <span className="hidden h-8 w-8 shrink-0 items-center justify-center rounded-lg border border-line bg-canvas text-muted sm:flex">
+            {activeCategory.icon}
+          </span>
+          <h2 className="truncate text-[15px] font-medium text-fg">{activeCategory.title}</h2>
         </div>
+        <button
+          onClick={handleBackToCategories}
+          className="inline-flex shrink-0 items-center gap-1 text-sm text-muted transition-colors hover:text-fg"
+        >
+          <ArrowLeft size={14} /> Subjects
+        </button>
       </div>
 
       {showScore ? (
-        <div className="text-center py-8 animate-fade-in">
-          <div className="mb-6 relative inline-block">
-            <Trophy size={80} className="mx-auto text-yellow-400 drop-shadow-md" />
-            <div className={`absolute -bottom-2 -right-2 w-10 h-10 rounded-full flex items-center justify-center text-white font-bold border-4 border-white dark:border-slate-800 ${score >= 7 ? 'bg-green-500' : 'bg-slate-400'}`}>
-                {Math.round((score / activeCategory.questions.length) * 100)}%
-            </div>
-          </div>
-
-          <h3 className="text-3xl font-bold text-slate-900 dark:text-white mb-2">Quiz Complete!</h3>
-          <p className="text-slate-500 dark:text-slate-400 mb-8">
-            You scored <span className="font-bold text-slate-900 dark:text-white">{score}</span> out of {activeCategory.questions.length}
+        <div className="animate-fade-in px-6 py-14 text-center">
+          <p className="eyebrow">Result</p>
+          <p className="mt-4 text-6xl font-semibold tracking-tightest text-fg">
+            {score}<span className="text-subtle">/{total}</span>
+          </p>
+          <p className="mt-3 text-muted">
+            {Math.round((score / total) * 100)}% correct{score >= 7 ? ' — nicely done.' : '. Give it another run.'}
           </p>
 
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <button
-              onClick={resetQuizState}
-              className="flex items-center justify-center gap-2 px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-colors font-bold shadow-md"
-            >
-              <RefreshCw size={20} />
-              Retry Quiz
+          <div className="mt-10 flex flex-col justify-center gap-3 sm:flex-row">
+            <button onClick={resetQuizState} className="btn-primary">
+              <RefreshCw size={15} />
+              Retry quiz
             </button>
-            <button
-              onClick={handleBackToCategories}
-              className="flex items-center justify-center gap-2 px-6 py-3 bg-white dark:bg-slate-700 hover:bg-slate-50 dark:hover:bg-slate-600 text-slate-700 dark:text-slate-200 border border-slate-200 dark:border-slate-600 rounded-lg transition-colors font-bold shadow-sm"
-            >
-              <BookOpen size={20} />
-              Choose Subject
+            <button onClick={handleBackToCategories} className="btn-secondary">
+              <BookOpen size={15} />
+              Choose subject
             </button>
           </div>
         </div>
       ) : (
-        <div className="animate-fade-in">
+        <div key={currentQuestion} className="animate-fade-in px-6 py-8 md:px-8">
           {/* Progress */}
           <div className="mb-8">
-            <div className="flex justify-between text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400 mb-2">
-              <span>Question {currentQuestion + 1} of {activeCategory.questions.length}</span>
-              <span>Score: {score}</span>
+            <div className="mb-3 flex justify-between font-mono text-xs text-subtle">
+              <span>Question {currentQuestion + 1} / {total}</span>
+              <span>Score {score}</span>
             </div>
-            <div className="w-full bg-slate-100 dark:bg-slate-700 rounded-full h-2.5 overflow-hidden">
-              <div 
-                className="bg-blue-600 h-full rounded-full transition-all duration-500 ease-out" 
-                style={{ width: `${((currentQuestion + 1) / activeCategory.questions.length) * 100}%` }}
-              ></div>
+            <div className="h-1 w-full overflow-hidden rounded-full bg-raised">
+              <div
+                className="h-full rounded-full bg-fg transition-all duration-500 ease-out"
+                style={{ width: `${((currentQuestion + 1) / total) * 100}%` }}
+              />
             </div>
           </div>
 
-          {/* Question Text */}
-          <h3 className="text-xl md:text-2xl font-bold text-slate-900 dark:text-white mb-8 leading-snug min-h-[4rem]">
-            {activeCategory.questions[currentQuestion].text}
+          <h3 className="mb-8 min-h-[4rem] text-xl font-medium leading-snug tracking-tight text-fg md:text-2xl">
+            {question.text}
           </h3>
 
-          {/* Options Grid */}
-          <div className="space-y-3">
-            {activeCategory.questions[currentQuestion].options.map((option, index) => {
+          <div className="space-y-2">
+            {question.options.map((option, index) => {
               const isSelected = selectedOption === index;
-              const isCorrectAnswer = index === activeCategory.questions[currentQuestion].correctAnswer;
-              
-              let buttonClass = "w-full text-left p-4 rounded-xl border-2 transition-all duration-200 font-medium relative overflow-hidden ";
-              
+              const isCorrectAnswer = index === question.correctAnswer;
+
+              let buttonClass = "flex w-full items-center gap-4 rounded-lg border px-4 py-3.5 text-left text-[15px] transition-colors duration-150 ";
+
               if (selectedOption === null) {
-                // Default State
-                buttonClass += "border-slate-200 dark:border-slate-600 bg-white dark:bg-slate-700/50 hover:border-blue-300 dark:hover:border-blue-500 hover:bg-blue-50/50 dark:hover:bg-blue-950/40 text-slate-700 dark:text-slate-200";
+                buttonClass += "border-line bg-canvas text-fg hover:border-line-strong hover:bg-surface";
               } else if (isCorrectAnswer) {
-                // Correct Answer State (Always show correct answer when reveal happens)
-                buttonClass += "border-green-500 bg-green-50 dark:bg-green-950/50 text-green-800 dark:text-green-300 shadow-sm z-10";
-              } else if (isSelected && !isCorrectAnswer) {
-                // Wrong Selection State
-                buttonClass += "border-red-500 bg-red-50 dark:bg-red-950/50 text-red-800 dark:text-red-300 shadow-sm z-10";
+                // Always reveal the correct answer once a choice is made
+                buttonClass += "border-good/50 bg-good/10 text-fg";
+              } else if (isSelected) {
+                buttonClass += "border-bad/50 bg-bad/10 text-fg";
               } else {
-                // Dim other answers
-                buttonClass += "border-slate-100 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-slate-400 dark:text-slate-500 opacity-50";
+                buttonClass += "border-line bg-canvas text-subtle";
               }
 
               return (
@@ -316,23 +298,23 @@ const QuizBowl: React.FC = () => {
                   disabled={selectedOption !== null}
                   className={buttonClass}
                 >
-                  <div className="flex justify-between items-center relative z-10">
-                    <span className="flex-grow pr-4">{option}</span>
-                    {selectedOption !== null && isCorrectAnswer && <CheckCircle size={20} className="text-green-600 flex-shrink-0" />}
-                    {isSelected && !isCorrectAnswer && <AlertCircle size={20} className="text-red-500 flex-shrink-0" />}
-                  </div>
+                  <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-md border border-line font-mono text-xs text-subtle">
+                    {String.fromCharCode(65 + index)}
+                  </span>
+                  <span className="flex-grow">{option}</span>
+                  {selectedOption !== null && isCorrectAnswer && <CheckCircle size={18} className="shrink-0 text-good" />}
+                  {isSelected && !isCorrectAnswer && <AlertCircle size={18} className="shrink-0 text-bad" />}
                 </button>
               );
             })}
           </div>
-          
-          {/* Feedback Text Area */}
-          <div className="mt-6 h-6 flex items-center justify-center text-sm font-bold">
-             {selectedOption !== null && (
-                 isCorrect 
-                 ? <span className="text-green-600 flex items-center gap-1 animate-fade-in"><CheckCircle size={16}/> Correct!</span> 
-                 : <span className="text-red-500 flex items-center gap-1 animate-fade-in"><AlertCircle size={16}/> Incorrect</span>
-             )}
+
+          <div className="mt-6 flex h-6 items-center justify-center text-sm">
+            {selectedOption !== null && (
+              isCorrect
+                ? <span className="animate-fade-in text-good">Correct</span>
+                : <span className="animate-fade-in text-bad">Incorrect</span>
+            )}
           </div>
         </div>
       )}

@@ -1,7 +1,6 @@
-
 import React from 'react';
-import { BookOpen, Award, Terminal, GitBranch, ShieldCheck, Database } from 'lucide-react';
 import { EducationItem } from '../types';
+import SectionHeader from './SectionHeader';
 
 const educationData: EducationItem[] = [
   {
@@ -17,98 +16,68 @@ const educationData: EducationItem[] = [
   }
 ];
 
+const certifications = [
+  { name: 'Introduction to Linux', issuer: 'LinkedIn', date: 'Sep 2025' },
+  { name: 'Advent of Cyber 2024', issuer: 'TryHackMe', date: 'Dec 2024' },
+  { name: 'FRED Data Practitioner', issuer: 'St. Louis Fed', date: 'Nov 2024' },
+  { name: 'Foundations of Git', issuer: 'GitKraken', date: 'Feb 2024' },
+];
+
 const Education: React.FC = () => {
+  const edu = educationData[0];
+  // "Major: Business Information Technology" -> ["Major", "Business Information Technology"]
+  const details = edu.details.map((d) => {
+    const [label, ...rest] = d.split(':');
+    return { label: label.trim(), value: rest.join(':').trim() };
+  });
+
+  const rows = [
+    { label: 'Degree', value: edu.degree },
+    ...details,
+    { label: 'Graduation', value: edu.graduation },
+    { label: 'GPA', value: edu.gpa },
+  ];
+
   return (
-    <div className="space-y-12 animate-fade-in-up">
-      <div className="text-center mb-12">
-        <h2 className="text-4xl font-bold text-slate-900 dark:text-white mb-4">Education & Certifications</h2>
-        <p className="text-slate-500 dark:text-slate-400 max-w-2xl mx-auto text-lg">
-          Building a strong foundation in both business logic and technical implementation at Tennessee Tech.
-        </p>
-      </div>
+    <div className="animate-fade-in-up">
+      <SectionHeader
+        eyebrow="Education"
+        title="Education & certifications"
+        description="Pairing business strategy with technical depth at Tennessee Tech."
+      />
 
-      {/* Main Education Card */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-        <div className="md:col-span-2 bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 overflow-hidden shadow-md hover:shadow-lg transition-shadow">
-          <div className="bg-slate-50 dark:bg-slate-900/50 p-8 border-b border-slate-200 dark:border-slate-700">
-            <div className="flex items-center gap-4 mb-3">
-              <div className="p-2 bg-blue-100 dark:bg-blue-900/50 rounded-lg">
-                <BookOpen className="text-blue-600 dark:text-blue-300" size={28} />
+      <section className="panel overflow-hidden">
+        <div className="flex flex-col gap-2 border-b border-line bg-surface px-6 py-5 sm:flex-row sm:items-center sm:justify-between md:px-8">
+          <h2 className="text-lg font-semibold tracking-tight text-fg">{edu.school}</h2>
+          <span className="font-mono text-xs text-muted">Cookeville, TN</span>
+        </div>
+        <dl className="divide-y divide-line">
+          {rows.map((row) => (
+            <div key={row.label} className="grid gap-1 px-6 py-4 sm:grid-cols-[160px_1fr] sm:gap-6 md:px-8">
+              <dt className="text-sm text-subtle">{row.label}</dt>
+              <dd className="text-[15px] text-fg">{row.value}</dd>
+            </div>
+          ))}
+        </dl>
+      </section>
+
+      <section className="mt-24 grid gap-10 md:grid-cols-[200px_1fr]">
+        <div>
+          <p className="eyebrow">Certifications</p>
+          <h2 className="mt-3 text-xl font-semibold tracking-tight text-fg">Credentials</h2>
+        </div>
+        <ul className="divide-y divide-line border-y border-line">
+          {certifications.map((cert) => (
+            <li key={cert.name} className="flex flex-col gap-1 py-4 sm:flex-row sm:items-baseline sm:justify-between sm:gap-6">
+              <div>
+                <p className="text-[15px] font-medium text-fg">{cert.name}</p>
+                <p className="text-sm text-muted">{cert.issuer}</p>
               </div>
-              <h3 className="text-2xl font-bold text-slate-900 dark:text-white tracking-tight">{educationData[0].school}</h3>
-            </div>
-            <p className="text-slate-600 dark:text-slate-300 text-lg font-medium">{educationData[0].degree}</p>
-          </div>
-          <div className="p-8">
-            <div className="flex flex-wrap gap-4 mb-8">
-              <span className="bg-blue-50 dark:bg-blue-950/50 text-blue-700 dark:text-blue-300 border border-blue-100 dark:border-blue-900 px-4 py-2 rounded-full font-semibold text-sm tracking-wide">
-                GPA: {educationData[0].gpa}
-              </span>
-              <span className="bg-green-50 dark:bg-green-950/50 text-green-700 dark:text-green-300 border border-green-100 dark:border-green-900 px-4 py-2 rounded-full font-semibold text-sm tracking-wide">
-                Graduation: {educationData[0].graduation}
-              </span>
-            </div>
-
-            <h4 className="text-xl font-bold text-slate-900 dark:text-white mb-4">Academic Focus</h4>
-            <ul className="space-y-3">
-              {educationData[0].details.map((detail, idx) => (
-                <li key={idx} className="flex items-start gap-3 text-slate-600 dark:text-slate-300">
-                  <div className="mt-2 w-2 h-2 rounded-full bg-blue-500"></div>
-                  <span className="text-lg">{detail}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
-        </div>
-
-        {/* Certifications & Interests */}
-        <div className="space-y-6">
-          <div className="bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 p-8 h-full flex flex-col justify-start shadow-md hover:shadow-lg transition-shadow">
-            <div className="flex items-center gap-3 mb-6 border-b border-slate-100 dark:border-slate-700 pb-4">
-              <Award className="text-blue-600 dark:text-blue-300" size={28} />
-              <h3 className="text-xl font-bold text-slate-900 dark:text-white">Certifications</h3>
-            </div>
-            <ul className="space-y-4">
-              <li className="flex items-center gap-4 text-slate-700 dark:text-slate-200 p-3 bg-slate-50 dark:bg-slate-900/50 rounded-lg border border-slate-100 dark:border-slate-700 hover:border-blue-200 dark:hover:border-blue-700 transition-colors">
-                <div className="p-2 bg-white dark:bg-slate-700 rounded-md shadow-sm text-blue-600 dark:text-blue-300">
-                    <Terminal size={20} />
-                </div>
-                <div>
-                    <span className="font-bold block text-sm text-slate-900 dark:text-white">Introduction to Linux</span>
-                    <span className="text-xs text-slate-500 dark:text-slate-400 font-semibold uppercase tracking-wide">LinkedIn • Sep 2025</span>
-                </div>
-              </li>
-              <li className="flex items-center gap-4 text-slate-700 dark:text-slate-200 p-3 bg-slate-50 dark:bg-slate-900/50 rounded-lg border border-slate-100 dark:border-slate-700 hover:border-blue-200 dark:hover:border-blue-700 transition-colors">
-                <div className="p-2 bg-white dark:bg-slate-700 rounded-md shadow-sm text-blue-600 dark:text-blue-300">
-                    <GitBranch size={20} />
-                </div>
-                <div>
-                    <span className="font-bold block text-sm text-slate-900 dark:text-white">Foundations of Git</span>
-                    <span className="text-xs text-slate-500 dark:text-slate-400 font-semibold uppercase tracking-wide">GitKraken • Feb 2024</span>
-                </div>
-              </li>
-              <li className="flex items-center gap-4 text-slate-700 dark:text-slate-200 p-3 bg-slate-50 dark:bg-slate-900/50 rounded-lg border border-slate-100 dark:border-slate-700 hover:border-blue-200 dark:hover:border-blue-700 transition-colors">
-                <div className="p-2 bg-white dark:bg-slate-700 rounded-md shadow-sm text-blue-600 dark:text-blue-300">
-                    <ShieldCheck size={20} />
-                </div>
-                <div>
-                    <span className="font-bold block text-sm text-slate-900 dark:text-white">Advent of Cyber 2024</span>
-                    <span className="text-xs text-slate-500 dark:text-slate-400 font-semibold uppercase tracking-wide">TryHackMe • Dec 2024</span>
-                </div>
-              </li>
-              <li className="flex items-center gap-4 text-slate-700 dark:text-slate-200 p-3 bg-slate-50 dark:bg-slate-900/50 rounded-lg border border-slate-100 dark:border-slate-700 hover:border-blue-200 dark:hover:border-blue-700 transition-colors">
-                <div className="p-2 bg-white dark:bg-slate-700 rounded-md shadow-sm text-blue-600 dark:text-blue-300">
-                    <Database size={20} />
-                </div>
-                <div>
-                    <span className="font-bold block text-sm text-slate-900 dark:text-white">FRED Data Practitioner</span>
-                    <span className="text-xs text-slate-500 dark:text-slate-400 font-semibold uppercase tracking-wide">St. Louis Fed • Nov 2024</span>
-                </div>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </div>
+              <p className="font-mono text-xs text-subtle">{cert.date}</p>
+            </li>
+          ))}
+        </ul>
+      </section>
     </div>
   );
 };

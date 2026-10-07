@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import Education from './components/Education';
@@ -7,8 +7,30 @@ import ProjectsSection from './components/ProjectsSection';
 import Footer from './components/Footer';
 import { Section } from './types';
 
+// The active section is mirrored in the URL hash (#experience, #projects, ...)
+// so each page can be linked to directly and the back button works.
+const sectionFromHash = (): Section => {
+  const hash = window.location.hash.slice(1);
+  return (Object.values(Section) as string[]).includes(hash) ? (hash as Section) : Section.HOME;
+};
+
 const App: React.FC = () => {
-  const [activeSection, setActiveSection] = useState<Section>(Section.HOME);
+  const [activeSection, setSection] = useState<Section>(sectionFromHash);
+
+  useEffect(() => {
+    const onHashChange = () => setSection(sectionFromHash());
+    window.addEventListener('hashchange', onHashChange);
+    return () => window.removeEventListener('hashchange', onHashChange);
+  }, []);
+
+  const setActiveSection = (section: Section) => {
+    if (section === Section.HOME) {
+      history.pushState(null, '', window.location.pathname);
+      setSection(Section.HOME);
+    } else {
+      window.location.hash = section;
+    }
+  };
 
   const renderSection = () => {
     switch (activeSection) {
@@ -26,11 +48,11 @@ const App: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen flex flex-col bg-slate-50 dark:bg-slate-900 transition-colors duration-300">
+    <div className="flex min-h-screen flex-col bg-canvas">
       <Navbar activeSection={activeSection} setActiveSection={setActiveSection} />
-      
-      <main className="flex-grow pt-16">
-        <div className="container mx-auto px-4 py-8 max-w-6xl">
+
+      <main className="relative flex-grow">
+        <div key={activeSection} className="relative mx-auto max-w-5xl px-5 pb-24 pt-16 md:px-8 md:pt-24">
           {renderSection()}
         </div>
       </main>

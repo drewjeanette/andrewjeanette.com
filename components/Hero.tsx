@@ -1,123 +1,139 @@
 import React from 'react';
 import { Section } from '../types';
-import { ArrowRight, Linkedin, Mail, Phone, MapPin } from 'lucide-react';
+import { ArrowRight, ArrowUpRight } from 'lucide-react';
 
 interface HeroProps {
   navigateTo: (section: Section) => void;
 }
 
-const technicalSkills = [
-  'SQL Server Management Studio',
-  'Windows Server',
-  'Microsoft 365',
-  'Git / GitHub',
-  'Firebase',
-  'React',
-  'JavaScript / TypeScript',
-  'Network Administration',
+const facts = [
+  { label: 'Currently', value: 'IT Administrator', detail: 'City of Algood' },
+  { label: 'Studying', value: 'Business IT, B.S.', detail: 'Tennessee Tech · Dec 2026' },
+  { label: 'Based in', value: 'Cookeville, TN', detail: 'Open to opportunities' },
 ];
 
-const softSkills = [
-  'Problem Solving',
-  'Critical Thinking',
-  'Communication',
-  'Customer Service',
-  'Team Collaboration',
-  'Adaptability',
+const skillGroups = [
+  {
+    title: 'Infrastructure',
+    items: ['Windows Server', 'Network Administration', 'Microsoft 365', 'SQL Server / SSMS'],
+  },
+  {
+    title: 'Development',
+    items: ['React', 'JavaScript / TypeScript', 'Firebase', 'Git / GitHub'],
+  },
+  {
+    title: 'Professional',
+    items: ['Problem Solving', 'Technical Communication', 'Customer Service', 'Team Collaboration'],
+  },
+];
+
+const contacts = [
+  { label: 'Email', value: 'andrewjeanettebusiness@gmail.com', href: 'mailto:andrewjeanettebusiness@gmail.com' },
+  { label: 'Phone', value: '(615) 766-6373', href: 'tel:+16157666373' },
+  { label: 'LinkedIn', value: 'in/andrew-jeanette', href: 'https://www.linkedin.com/in/andrew-jeanette' },
 ];
 
 const Hero: React.FC<HeroProps> = ({ navigateTo }) => {
   return (
-    <div className="animate-fade-in">
+    <div className="animate-fade-in-up">
       {/* Intro */}
-      <div className="flex flex-col-reverse md:flex-row items-center gap-12 py-12 md:py-16">
-        <div className="flex-1 space-y-6 text-center md:text-left">
-          <div className="inline-block px-4 py-1.5 bg-blue-50 dark:bg-blue-950/50 border border-blue-100 dark:border-blue-900 text-blue-600 dark:text-blue-300 font-bold rounded-full text-sm shadow-sm">
-            IT Administrator • City of Algood
-          </div>
-
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-slate-900 dark:text-white leading-tight">
-            Hi, I'm <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-600 dark:from-blue-400 dark:to-indigo-400">Andrew Jeanette</span>
-          </h1>
-
-          <p className="text-lg md:text-xl text-slate-600 dark:text-slate-300 leading-relaxed font-light">
-            I am a Business Information Technology major with a Computer Science minor at Tennessee
-            Technological University, currently serving as the IT Administrator for the City of Algood.
-            I specialize in bridging business strategy and technical implementation across system,
-            network, and security administration.
+      <section className="flex flex-col-reverse gap-10 md:flex-row md:items-end md:justify-between">
+        <div className="max-w-2xl">
+          <p className="eyebrow mb-6 flex items-center gap-2">
+            <span className="relative flex h-1.5 w-1.5">
+              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-good opacity-60" />
+              <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-good" />
+            </span>
+            IT Administrator · City of Algood
           </p>
 
-          <div className="pt-2 flex flex-wrap gap-4 justify-center md:justify-start">
-            <button
-              onClick={() => navigateTo(Section.EXPERIENCE)}
-              className="group flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white font-bold py-3.5 px-7 rounded-lg transition-all shadow-lg hover:shadow-xl hover:-translate-y-1"
-            >
-              View My Experience
-              <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
+          <h1 className="text-[2.75rem] font-semibold leading-[1.02] tracking-tightest text-fg sm:text-6xl md:text-7xl">
+            Andrew Jeanette
+          </h1>
+
+          <p className="mt-6 max-w-xl text-lg leading-relaxed text-muted md:text-xl md:leading-relaxed">
+            I keep a city's systems, networks, and endpoints running — and build software on the side.
+            Business IT student at Tennessee Tech with a minor in Computer Science.
+          </p>
+
+          <div className="mt-9 flex flex-wrap gap-3">
+            <button onClick={() => navigateTo(Section.EXPERIENCE)} className="btn-primary group">
+              View experience
+              <ArrowRight size={15} className="transition-transform group-hover:translate-x-0.5" />
             </button>
-
-            <a
-              href="https://www.linkedin.com/in/andrew-jeanette"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center gap-2 bg-white dark:bg-slate-800 hover:bg-slate-50 dark:hover:bg-slate-700 border border-slate-200 dark:border-slate-700 hover:border-blue-300 dark:hover:border-blue-500 hover:text-blue-600 dark:hover:text-blue-400 text-slate-700 dark:text-slate-200 font-medium py-3.5 px-7 rounded-lg transition-all shadow-sm"
-            >
-              <Linkedin size={20} />
-              LinkedIn
-            </a>
-          </div>
-
-          {/* Contact row */}
-          <div className="pt-4 flex flex-wrap gap-x-6 gap-y-3 justify-center md:justify-start text-sm text-slate-500 dark:text-slate-400">
-            <a href="mailto:andrewjeanettebusiness@gmail.com" className="flex items-center gap-2 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
-              <Mail size={16} /> andrewjeanettebusiness@gmail.com
-            </a>
-            <a href="tel:+16157666373" className="flex items-center gap-2 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
-              <Phone size={16} /> (615) 766-6373
-            </a>
-            <span className="flex items-center gap-2">
-              <MapPin size={16} /> Cookeville, TN
-            </span>
+            <button onClick={() => navigateTo(Section.PROJECTS)} className="btn-secondary">
+              See projects
+            </button>
           </div>
         </div>
 
-        {/* Profile image */}
-        <div className="shrink-0">
-          <div className="relative">
-            <div className="absolute -inset-3 bg-gradient-to-br from-blue-500 to-indigo-500 rounded-3xl opacity-20 blur-lg"></div>
-            <img
-              src={`${import.meta.env.BASE_URL}profile.png`}
-              alt="Andrew Jeanette"
-              className="relative w-48 h-48 md:w-60 md:h-60 rounded-3xl object-cover border-4 border-white dark:border-slate-700 shadow-xl"
-            />
+        <img
+          src={`${import.meta.env.BASE_URL}profile.png`}
+          alt="Portrait of Andrew Jeanette"
+          className="h-28 w-28 shrink-0 rounded-2xl border border-line object-cover md:h-40 md:w-40"
+        />
+      </section>
+
+      {/* At a glance */}
+      <section className="mt-20 grid grid-cols-1 overflow-hidden rounded-xl border border-line sm:grid-cols-3">
+        {facts.map((fact, i) => (
+          <div
+            key={fact.label}
+            className={`bg-canvas p-6 ${i > 0 ? 'border-t border-line sm:border-l sm:border-t-0' : ''}`}
+          >
+            <p className="eyebrow">{fact.label}</p>
+            <p className="mt-3 text-[15px] font-medium text-fg">{fact.value}</p>
+            <p className="mt-0.5 text-sm text-muted">{fact.detail}</p>
           </div>
-        </div>
-      </div>
+        ))}
+      </section>
 
       {/* Skills */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 my-12">
-        <div className="bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 p-8 shadow-md hover:shadow-lg transition-shadow">
-          <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-5 border-l-4 border-blue-600 pl-3">Technical Skills</h3>
-          <div className="flex flex-wrap gap-2">
-            {technicalSkills.map(skill => (
-              <span key={skill} className="px-3 py-1.5 bg-blue-50 dark:bg-blue-950/50 text-blue-700 dark:text-blue-300 border border-blue-100 dark:border-blue-900 text-sm rounded-full font-semibold">
-                {skill}
-              </span>
-            ))}
-          </div>
+      <section className="mt-24 grid gap-10 md:grid-cols-[200px_1fr]">
+        <div>
+          <p className="eyebrow">Skills</p>
+          <h2 className="mt-3 text-xl font-semibold tracking-tight text-fg">What I work with</h2>
         </div>
+        <div className="grid gap-px overflow-hidden rounded-xl border border-line bg-line sm:grid-cols-3">
+          {skillGroups.map((group) => (
+            <div key={group.title} className="bg-canvas p-6">
+              <h3 className="text-sm font-medium text-fg">{group.title}</h3>
+              <ul className="mt-4 space-y-2.5">
+                {group.items.map((item) => (
+                  <li key={item} className="flex items-center gap-2.5 text-sm text-muted">
+                    <span className="h-1 w-1 rounded-full bg-subtle" aria-hidden="true" />
+                    {item}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </div>
+      </section>
 
-        <div className="bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 p-8 shadow-md hover:shadow-lg transition-shadow">
-          <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-5 border-l-4 border-indigo-500 pl-3">Professional Skills</h3>
-          <div className="flex flex-wrap gap-2">
-            {softSkills.map(skill => (
-              <span key={skill} className="px-3 py-1.5 bg-slate-50 dark:bg-slate-700 text-slate-700 dark:text-slate-200 border border-slate-200 dark:border-slate-600 text-sm rounded-full font-semibold">
-                {skill}
-              </span>
-            ))}
-          </div>
+      {/* Contact */}
+      <section className="mt-24 grid gap-10 md:grid-cols-[200px_1fr]">
+        <div>
+          <p className="eyebrow">Contact</p>
+          <h2 className="mt-3 text-xl font-semibold tracking-tight text-fg">Get in touch</h2>
         </div>
-      </div>
+        <ul className="divide-y divide-line border-y border-line">
+          {contacts.map((c) => (
+            <li key={c.label}>
+              <a
+                href={c.href}
+                target={c.href.startsWith('http') ? '_blank' : undefined}
+                rel={c.href.startsWith('http') ? 'noopener noreferrer' : undefined}
+                className="group flex items-center justify-between gap-4 py-4"
+              >
+                <span className="w-24 shrink-0 text-sm text-subtle">{c.label}</span>
+                <span className="flex-1 truncate text-sm text-fg sm:text-[15px]">{c.value}</span>
+                <ArrowUpRight size={16} className="shrink-0 text-subtle transition-all group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-fg" />
+              </a>
+            </li>
+          ))}
+        </ul>
+      </section>
     </div>
   );
 };

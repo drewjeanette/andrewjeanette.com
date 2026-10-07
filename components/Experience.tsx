@@ -1,13 +1,13 @@
 import React from 'react';
-import { Briefcase, Calendar, MapPin, Users } from 'lucide-react';
 import { ExperienceItem } from '../types';
+import SectionHeader from './SectionHeader';
 
 const experienceData: ExperienceItem[] = [
   {
     id: "ALGOOD",
     role: "IT Administrator",
     company: "City of Algood",
-    duration: "Jan 2026 - Present",
+    duration: "Jan 2026 – Present",
     location: "Cookeville, TN",
     description: "Manage and maintain citywide IT infrastructure across all municipal departments, serving as system, network, and security administrator for servers, endpoints, workstations, mobile devices, and network equipment. Diagnose and resolve hardware, software, network, and security issues supporting enterprise systems (Windows Server, desktops, Microsoft SQL Server) and public safety operations. Oversee IT asset lifecycle management and software licensing, coordinate with vendors, execute procurement recommendations, and provide technical documentation and training to non-technical staff.",
     skills: ["Windows Server", "Network Administration", "Security", "Microsoft SQL Server", "Asset Management"]
@@ -16,34 +16,34 @@ const experienceData: ExperienceItem[] = [
     id: "ELCO",
     role: "Software Developer Intern",
     company: "Elco Dev, LLC",
-    duration: "May 2025 - May 2026",
+    duration: "May 2025 – May 2026",
     location: "Remote",
     description: "Optimized databases with indexing that cut query times from 4 minutes to under 5 seconds, and built an online inventory management system with filtering and Excel exports that earned strong client feedback. Developed a 3D mini-golf game in Unity 6 and C# featuring a daily-seed system that generates one globally synchronized course every 24 hours. Built a custom drag-and-release shooting mechanic with trajectory rendering, tuned arcade physics simulating turf friction and wall ricochets, a dual-camera system (ball-tracking and bounded free-fly), and a responsive UI with live stroke tracking, a midnight countdown, and an end-of-match summary.",
     skills: ["Unity 6", "C#", "SQL Server", "JavaScript", "React", "Firebase"]
   },
   {
-    id: "ICUBE",
-    role: "Find Help Now TN Intern",
-    company: "Tennessee Tech University iCube",
-    duration: "Feb 2025 - Aug 2025",
-    location: "Cookeville, TN",
-    description: "Supported team operations by handling email, Google Sheets, and Canva. Contacted and assisted healthcare clinics across Tennessee with onboarding and platform adoption. Provided general administrative and organizational support to ensure efficient operations.",
-    skills: ["Communication", "Onboarding", "Canva", "Google Sheets"]
-  },
-  {
     id: "STEM",
     role: "STEM Ambassador",
     company: "Tennessee Technological University",
-    duration: "Sep 2025 - Present",
+    duration: "Sep 2025 – Present",
     location: "Cookeville, TN",
     description: "Taught STEM concepts weekly to 50+ K-12 students using interactive classroom activities. Supported Tennessee Tech's outreach initiatives to inspire the next generation of students in STEM, providing leadership and teamwork in coordinating hands-on events.",
     skills: ["Leadership", "Teamwork", "Public Speaking", "Event Coordination"]
   },
   {
+    id: "ICUBE",
+    role: "Find Help Now TN Intern",
+    company: "Tennessee Tech University iCube",
+    duration: "Feb 2025 – Aug 2025",
+    location: "Cookeville, TN",
+    description: "Supported team operations by handling email, Google Sheets, and Canva. Contacted and assisted healthcare clinics across Tennessee with onboarding and platform adoption. Provided general administrative and organizational support to ensure efficient operations.",
+    skills: ["Communication", "Onboarding", "Canva", "Google Sheets"]
+  },
+  {
     id: "CANE",
     role: "Restaurant Crew Member",
     company: "Raising Cane's Chicken Fingers",
-    duration: "Oct 2023 - Jan 2026",
+    duration: "Oct 2023 – Jan 2026",
     location: "Cookeville, TN",
     description: "Operated multiple POS and scheduling systems with accuracy. Trained new staff on workflow optimization and systemized procedures. Worked every position from front-of-house to kitchen, maintaining performance during high-pressure rushes.",
     skills: ["Workflow Optimization", "Training", "Customer Service", "POS Systems"]
@@ -52,7 +52,7 @@ const experienceData: ExperienceItem[] = [
     id: "CFA",
     role: "Crew Member",
     company: "Chick-fil-A",
-    duration: "Apr 2021 - Nov 2023",
+    duration: "Apr 2021 – Nov 2023",
     location: "Mount Juliet, TN",
     description: "Delivered customer service in a fast-paced environment using digital POS systems. Recognized for efficient, friendly service in front-of-house and drive-thru. Twice awarded the Remarkable Futures Scholarship for exceptional performance.",
     skills: ["Customer Service", "Time Management", "Leadership"]
@@ -72,71 +72,49 @@ const involvement = [
 
 const Experience: React.FC = () => {
   return (
-    <div className="max-w-5xl mx-auto animate-fade-in-up">
-      <h2 className="text-4xl font-bold text-slate-900 dark:text-white mb-16 text-center">Professional Experience</h2>
+    <div className="animate-fade-in-up">
+      <SectionHeader
+        eyebrow="Experience"
+        title="Where I've worked"
+        description="Municipal IT, software development, and the customer-facing roles that taught me how to support people under pressure."
+      />
 
-      <div className="space-y-12 relative before:absolute before:inset-0 before:ml-5 before:-translate-x-px md:before:mx-auto md:before:translate-x-0 before:h-full before:w-1 before:bg-slate-200 dark:before:bg-slate-700">
-        {experienceData.map((item, index) => (
-          <div key={item.id} className="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group is-active">
-
-            {/* Dot on the timeline */}
-            <div className="flex items-center justify-center w-12 h-12 rounded-full border-4 border-white dark:border-slate-900 bg-blue-600 text-white shadow-md shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2 z-10 transition-transform group-hover:scale-110">
-              <Briefcase size={20} className="stroke-[2.5]" />
+      <ol className="border-t border-line">
+        {experienceData.map((item) => (
+          <li key={item.id} className="grid gap-3 border-b border-line py-10 md:grid-cols-[200px_1fr] md:gap-10">
+            <div className="space-y-1">
+              <p className="font-mono text-xs text-muted">{item.duration}</p>
+              <p className="font-mono text-xs text-subtle">{item.location}</p>
             </div>
 
-            {/* Content Card */}
-            <div className="w-[calc(100%-5rem)] md:w-[calc(50%-3rem)] bg-white dark:bg-slate-800 p-8 rounded-xl border border-slate-200 dark:border-slate-700 shadow-md hover:shadow-lg transition-all hover:-translate-y-1">
-              <div className="flex flex-col sm:flex-row justify-between sm:items-center mb-3">
-                <h3 className="font-bold text-xl text-slate-900 dark:text-white">{item.role}</h3>
-                <span className="text-xs font-bold text-blue-700 dark:text-blue-300 bg-blue-50 dark:bg-blue-950/50 border border-blue-100 dark:border-blue-900 px-3 py-1.5 rounded inline-block mt-2 sm:mt-0 w-fit tracking-wide uppercase">
-                  {item.company}
-                </span>
-              </div>
-
-              <div className="flex flex-col gap-2 text-sm text-slate-500 dark:text-slate-400 mb-5 pb-4 border-b border-slate-100 dark:border-slate-700">
-                <div className="flex items-center gap-2">
-                  <Calendar size={16} className="text-slate-400 dark:text-slate-500" />
-                  {item.duration}
-                </div>
-                <div className="flex items-center gap-2">
-                  <MapPin size={16} className="text-slate-400 dark:text-slate-500" />
-                  {item.location}
-                </div>
-              </div>
-
-              <p className="text-slate-600 dark:text-slate-300 mb-6 text-base leading-relaxed">
-                {item.description}
-              </p>
-
-              <div className="flex flex-wrap gap-2">
-                {item.skills.map(skill => (
-                  <span key={skill} className="px-3 py-1 bg-slate-50 dark:bg-slate-700 text-slate-600 dark:text-slate-200 text-xs rounded-full border border-slate-200 dark:border-slate-600 font-bold">
-                    {skill}
-                  </span>
+            <div>
+              <h2 className="text-lg font-semibold tracking-tight text-fg">{item.role}</h2>
+              <p className="mt-0.5 text-[15px] text-muted">{item.company}</p>
+              <p className="mt-4 max-w-2xl text-[15px] leading-7 text-muted">{item.description}</p>
+              <div className="mt-5 flex flex-wrap gap-1.5">
+                {item.skills.map((skill) => (
+                  <span key={skill} className="tag">{skill}</span>
                 ))}
               </div>
             </div>
-          </div>
+          </li>
         ))}
-      </div>
+      </ol>
 
-      {/* Campus Involvement */}
-      <div className="mt-24">
-        <h2 className="text-3xl font-bold text-slate-900 dark:text-white mb-10 text-center">Campus Involvement</h2>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <section className="mt-24 grid gap-10 md:grid-cols-[200px_1fr]">
+        <div>
+          <p className="eyebrow">Involvement</p>
+          <h2 className="mt-3 text-xl font-semibold tracking-tight text-fg">On campus</h2>
+        </div>
+        <div className="grid gap-px overflow-hidden rounded-xl border border-line bg-line sm:grid-cols-2">
           {involvement.map((item) => (
-            <div key={item.title} className="bg-white dark:bg-slate-800 p-7 rounded-xl border border-slate-200 dark:border-slate-700 shadow-md hover:shadow-lg hover:-translate-y-1 transition-all">
-              <div className="flex items-center gap-3 mb-4">
-                <div className="p-2 bg-blue-100 dark:bg-blue-900/50 rounded-lg text-blue-600 dark:text-blue-300">
-                  <Users size={22} />
-                </div>
-                <h3 className="font-bold text-lg text-slate-900 dark:text-white leading-tight">{item.title}</h3>
-              </div>
-              <p className="text-slate-600 dark:text-slate-300 leading-relaxed text-sm">{item.detail}</p>
+            <div key={item.title} className="bg-canvas p-6">
+              <h3 className="text-[15px] font-medium text-fg">{item.title}</h3>
+              <p className="mt-2 text-sm leading-relaxed text-muted">{item.detail}</p>
             </div>
           ))}
         </div>
-      </div>
+      </section>
     </div>
   );
 };

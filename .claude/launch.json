@@ -12,6 +12,12 @@
       "runtimeExecutable": "npx",
       "runtimeArgs": ["--yes", "wrangler", "dev", "--port", "8788"],
       "port": 8788
+    },
+    {
+      "name": "dist-python",
+      "runtimeExecutable": "python",
+      "runtimeArgs": ["-m", "http.server", "8790", "--directory", "dist"],
+      "port": 8790
     }
   ]
 }
