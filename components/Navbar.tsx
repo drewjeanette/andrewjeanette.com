@@ -69,9 +69,15 @@ const Navbar: React.FC<NavbarProps> = ({ activeSection, setActiveSection }) => {
             </button>
           ))}
           <span className="mx-2 h-4 w-px bg-line" aria-hidden="true" />
-          <a href="mailto:andrewjeanettebusiness@gmail.com" className="rounded-md px-3 py-1.5 text-sm text-muted transition-colors hover:text-fg">
+          <button
+            onClick={() => handleNavClick(Section.CONTACT)}
+            aria-current={activeSection === Section.CONTACT ? 'page' : undefined}
+            className={`rounded-md px-3 py-1.5 text-sm transition-colors ${
+              activeSection === Section.CONTACT ? 'bg-raised text-fg' : 'text-muted hover:text-fg'
+            }`}
+          >
             Contact
-          </a>
+          </button>
           <button
             onClick={toggleTheme}
             aria-label={themeLabel}
@@ -103,7 +109,7 @@ const Navbar: React.FC<NavbarProps> = ({ activeSection, setActiveSection }) => {
 
       {isMobileMenuOpen && (
         <div className="animate-fade-in border-t border-line bg-canvas px-5 py-3 md:hidden">
-          {navItems.map((item) => (
+          {[...navItems, { label: 'Contact', value: Section.CONTACT }].map((item) => (
             <button
               key={item.value}
               onClick={() => handleNavClick(item.value)}

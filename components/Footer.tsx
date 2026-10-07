@@ -1,9 +1,10 @@
 import React from 'react';
+import { EMAIL, LINKEDIN_URL, PHONE_DISPLAY, PHONE_TEL } from './contactInfo';
 
 const links = [
-  { label: 'Email', href: 'mailto:andrewjeanettebusiness@gmail.com' },
-  { label: 'LinkedIn', href: 'https://www.linkedin.com/in/andrew-jeanette' },
-  { label: '(615) 766-6373', href: 'tel:+16157666373' },
+  { label: 'Email', href: `mailto:${EMAIL}` },
+  { label: 'LinkedIn', href: LINKEDIN_URL },
+  { label: PHONE_DISPLAY, href: `tel:${PHONE_TEL}` },
 ];
 
 const Footer: React.FC = () => {

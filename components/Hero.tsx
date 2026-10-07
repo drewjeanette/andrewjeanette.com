@@ -1,6 +1,7 @@
 import React from 'react';
 import { Section } from '../types';
 import { ArrowRight, ArrowUpRight } from 'lucide-react';
+import { contacts } from './contactInfo';
 
 interface HeroProps {
   navigateTo: (section: Section) => void;
@@ -25,12 +26,6 @@ const skillGroups = [
     title: 'Professional',
     items: ['Problem Solving', 'Technical Communication', 'Customer Service', 'Team Collaboration'],
   },
-];
-
-const contacts = [
-  { label: 'Email', value: 'andrewjeanettebusiness@gmail.com', href: 'mailto:andrewjeanettebusiness@gmail.com' },
-  { label: 'Phone', value: '(615) 766-6373', href: 'tel:+16157666373' },
-  { label: 'LinkedIn', value: 'in/andrew-jeanette', href: 'https://www.linkedin.com/in/andrew-jeanette' },
 ];
 
 const Hero: React.FC<HeroProps> = ({ navigateTo }) => {

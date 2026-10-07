@@ -4,6 +4,7 @@ import Hero from './components/Hero';
 import Education from './components/Education';
 import Experience from './components/Experience';
 import ProjectsSection from './components/ProjectsSection';
+import Contact from './components/Contact';
 import Footer from './components/Footer';
 import { Section } from './types';
 
@@ -42,6 +43,8 @@ const App: React.FC = () => {
         return <Experience />;
       case Section.PROJECTS:
         return <ProjectsSection />;
+      case Section.CONTACT:
+        return <Contact />;
       default:
         return <Hero navigateTo={setActiveSection} />;
     }

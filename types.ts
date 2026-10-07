@@ -20,5 +20,6 @@ export enum Section {
   HOME = 'home',
   EDUCATION = 'education',
   EXPERIENCE = 'experience',
-  PROJECTS = 'projects'
+  PROJECTS = 'projects',
+  CONTACT = 'contact'
 }
