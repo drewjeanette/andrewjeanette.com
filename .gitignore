@@ -25,3 +25,9 @@ home/home.css
 *.njsproj
 *.sln
 *.sw?
+
+# Cloudflare Wrangler local state
+.wrangler/
+
+# Local Claude Code settings
+.claude/settings.local.json

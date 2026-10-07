@@ -1,20 +1,34 @@
-<div align="center">
-<img width="1200" height="475" alt="GHBanner" src="https://ai.google.dev/static/site-assets/images/share-ais-513315318.png" />
-</div>
+# andrewjeanette.com
 
-# Run and deploy your AI Studio app
+My personal site and e-portfolio, live at **[andrewjeanette.com](https://andrewjeanette.com)**.
 
-This contains everything you need to run your app locally.
+![andrewjeanette.com landing page](docs/home.png)
 
-View your app in AI Studio: https://ai.studio/apps/drive/1qIZwnoBdeWHsDZ4FFlItFZBXXBnbOUWp
+## What's here
 
-## Run Locally
+| Path | What it is | Source |
+|---|---|---|
+| `/` | Landing page | `home/` (static HTML + Tailwind) |
+| `/portfolio/` | E-portfolio covering education, experience and projects, with light/dark themes | React app (`App.tsx`, `components/`) |
+| `/portfolio/weatherapp/` | Real-time weather app | `weatherapp/` |
+| `/canon/privacy-policy/` | Privacy policy for my Canon mobile app | `canon/` |
 
-**Prerequisites:**  Node.js
+The portfolio also includes **Quiz Bowl** (`components/tools/QuizBowl.tsx`), an interactive study
+tool.
 
+## Stack
 
-1. Install dependencies:
-   `npm install`
-2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
-3. Run the app:
-   `npm run dev`
+React 19, TypeScript, Vite, Tailwind CSS and lucide-react, deployed as static assets on
+Cloudflare (`wrangler.jsonc`).
+
+A small Vite plugin in `vite.config.ts` copies the standalone pages (`home/`, `weatherapp/`,
+`canon/`) into `dist/` next to the React build, so one deploy serves the whole site.
+
+## Run locally
+
+```bash
+npm install
+npm run dev       # http://localhost:3000/portfolio/
+npm run build     # builds the landing-page CSS and the React app into dist/
+npx wrangler deploy
+```
