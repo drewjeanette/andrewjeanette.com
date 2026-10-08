@@ -2,7 +2,7 @@
   // Cloudflare Workers static-asset config for the Vite build.
   // The site is a pure static SPA (no server code), so there is no "main"
   // Worker entry — Cloudflare just serves the files in ./dist.
-  "name": "andrewjeanette-com",
+  "name": "andrewjeanette",
   "compatibility_date": "2025-01-01",
   "assets": {
     // Vite builds into dist/portfolio/, so the app is served at /portfolio/.
