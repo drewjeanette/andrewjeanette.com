@@ -12,6 +12,9 @@ dist
 dist-ssr
 *.local
 
+# Drive Sim runtime key file: generated at build time, never committed
+drive/config.json
+
 # Generated landing-page stylesheet (built by `npm run build`)
 home/home.css
 

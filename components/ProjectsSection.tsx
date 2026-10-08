@@ -18,7 +18,27 @@ interface Project {
   cta?: { label: string } & ({ type: 'link'; href: string } | { type: 'launch' });
 }
 
+// Drive Sim is a standalone build served from the site root at /drive/.
+const DRIVE_SIM_URL = '/drive/';
+
 const projects: Project[] = [
+  {
+    id: 'drive-sim',
+    title: 'Drive Sim: Learn to Drive on Real Streets',
+    subtitle: 'Open-Source Project · 2026',
+    paragraphs: [
+      'A browser-based driving simulator for people studying for their driver\'s license. Search an address or click anywhere on a 3D globe, and Drive Sim plans a real route and lets you drive it through Google Street View\'s 360° imagery with gas, brake, steering and a P R N D gear selector that enforces the same interlocks as a real automatic.',
+      'Instead of jumping between photos, a custom WebGL shader reprojects each panorama onto a model of the street from the car\'s exact position and cross-fades between neighbours, so the road flows smoothly under the car and the same view renders per eye in a VR headset. The car runs on a bicycle-model physics simulation in the road\'s Frenet frame, and a built-in examiner scores turn signals, speed, lane position and smoothness. It supports keyboards, Xbox and PlayStation controllers, and racing wheels with pedals through a calibration wizard.',
+    ],
+    techStackLabel: 'Stack & APIs',
+    techStack: ['TypeScript', 'three.js', 'WebGL / GLSL', 'WebXR', 'Gamepad API', 'Web Audio', 'Google Maps Platform', 'OpenStreetMap', 'Vitest'],
+    features: [
+      'Smooth 360° Street View Driving',
+      'Wheel, Controller & VR Support',
+      'Road-Test Style Scoring',
+    ],
+    cta: { type: 'link', href: DRIVE_SIM_URL, label: 'Launch Drive Sim' },
+  },
   {
     id: 'daily-golf',
     title: 'Daily Golf',
