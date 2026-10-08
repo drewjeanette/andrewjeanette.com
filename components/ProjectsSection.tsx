@@ -18,8 +18,9 @@ interface Project {
   cta?: { label: string } & ({ type: 'link'; href: string } | { type: 'launch' });
 }
 
-// Drive Sim is a standalone build served from the site root at /drive/.
-const DRIVE_SIM_URL = '/drive/';
+// Route to Drive Sim, a standalone build like the Weather App. Resolves to
+// /portfolio/driving-simulator/ in production.
+const DRIVE_SIM_URL = `${import.meta.env.BASE_URL}driving-simulator/`;
 
 const projects: Project[] = [
   {

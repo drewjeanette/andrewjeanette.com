@@ -8,19 +8,19 @@ import react from '@vitejs/plugin-react';
 //   - home/         -> dist/             (root "/" landing page)
 //   - weatherapp/   -> dist/portfolio/weatherapp/  ("/portfolio/weatherapp/")
 //   - canon/        -> dist/canon/                 ("/canon/...")
-//   - drive/        -> dist/drive/                 ("/drive/", Drive Sim build)
+//   - driving-simulator/ -> dist/portfolio/driving-simulator/  (Drive Sim build)
 //
 // Drive Sim is built in its own repo (github.com/drewjeanette/driving-simulation)
 // and copied here with `npm run publish:site`. Its Google Maps key is never
 // committed: set DRIVE_GOOGLE_MAPS_API_KEY in the build environment and this
-// plugin writes it to dist/drive/config.json. Without it the simulator runs in
+// plugin writes it to dist/portfolio/driving-simulator/config.json. Without it the simulator runs in
 // its keyless OpenStreetMap mode.
 function copyStaticPages(): Plugin {
   const copies = [
     { from: 'home', to: 'dist' },
     { from: 'weatherapp', to: 'dist/portfolio/weatherapp' },
     { from: 'canon', to: 'dist/canon' },
-    { from: 'drive', to: 'dist/drive' },
+    { from: 'driving-simulator', to: 'dist/portfolio/driving-simulator' },
   ];
   return {
     name: 'copy-static-pages',
@@ -32,7 +32,7 @@ function copyStaticPages(): Plugin {
           { recursive: true }
         );
       }
-      const configPath = path.resolve(__dirname, 'dist/drive/config.json');
+      const configPath = path.resolve(__dirname, 'dist/portfolio/driving-simulator/config.json');
       fs.rmSync(configPath, { force: true }); // never ship a stale key from an earlier build
       const key = process.env.DRIVE_GOOGLE_MAPS_API_KEY?.trim();
       if (key) {
