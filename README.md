@@ -30,10 +30,14 @@ A small Vite plugin in `vite.config.ts` copies the standalone pages (`home/`, `w
 `driving-simulator/` is the production build of [driving-simulation](https://github.com/drewjeanette/driving-simulation).
 To update it, run `npm run publish:site` in that repo (with this repo checked out next to it), then commit here.
 
-For Google Maps and Street View, set `DRIVE_GOOGLE_MAPS_API_KEY` in the build environment (Cloudflare build
-variables, or your shell before `npm run build`). The build writes it to `dist/portfolio/driving-simulator/config.json`, so it is never
-committed. Restrict the key to `https://andrewjeanette.com/*` and the APIs listed in the simulator's README.
-Without the variable the simulator runs in its keyless OpenStreetMap mode.
+Credentials are set in the build environment (Cloudflare build variables, or your shell before
+`npm run build`) and written to `dist/portfolio/driving-simulator/config.json`, so they are never committed:
+
+- `DRIVE_MAPILLARY_TOKEN`: free Mapillary client token (`MLY|...`) for 360° street photos.
+- `DRIVE_GOOGLE_MAPS_API_KEY` (optional): switches the simulator to Google Street View. Restrict it to
+  `https://andrewjeanette.com/*` and the APIs listed in the simulator's README.
+
+With neither set, the simulator drives a generated road on OpenStreetMap data.
 
 ## Run locally
 
